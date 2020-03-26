@@ -9,6 +9,20 @@ const concat = require('gulp-concat');
 // const browserSync = require('browser-sync');
 // const server = browserSync.create();
 
+// function rootFiles() {
+//     return src(['index.js',
+//                 'index.html',
+//                 'package-lock.json',
+//                 'package.json'
+//     ])
+//     .pipe(dest('./dist'));    
+// }
+
+// function socket() {
+//     return src(['socket.io/socket.io.js'])
+//     .pipe(dest('./dist/socket.io'));    
+// }
+
 function scripts() {
     return src(['scripts/main.js',
                 'scripts/connections.js'
@@ -16,6 +30,7 @@ function scripts() {
     .pipe(plumber())
     .pipe(concat('custom.min.js'))
     .pipe(dest('./public'));
+    // .pipe(dest('./dist/public'));
 }
 
 // function styles() {
