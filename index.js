@@ -39,7 +39,7 @@ io.on('connection', function(socket){
 
     // socket.broadcast.emit('hi');
 });
-
+console.log(process.env.PORT);
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;
