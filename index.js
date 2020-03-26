@@ -6,7 +6,7 @@ var io = require('socket.io')(http);
 let playerList = [];
 
 // Make the 'public' directory able to serve static assets
-app.use(express.static(path.join('public')));
+app.use(express.static('/public'));
 
 app.get('/', function(req, res){
     //   res.send('<h1>Hello world</h1>');
