@@ -7,6 +7,8 @@
 // Global variable to namespace modules
 codrink19 = {};
 
+let socket;
+
 $(document).ready(function() {
-    codrink19.connections.init();
+    codrink19.connection.init();
 });

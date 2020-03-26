@@ -3,6 +3,7 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var path = require('path');
+const shortid = require('shortid');
 
 let playerList = [];
 
@@ -10,15 +11,68 @@ let playerList = [];
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'socket.io')));
 
+// Handle request to root
 app.get('/', function(req, res){
-    //   res.send('<h1>Hello world</h1>');
-    console.log('is this happening');
     res.sendFile(__dirname + '/index.html');
-
 });
 
+// Handle a connection to the app. 
+// Create a new player OR
+// Match it to an existing player if it's a reconnection.
 io.on('connection', function(socket){
-    console.log('a new player has entered');
+    console.log('a connection was detected');
+
+    socket.on('client connection', function(playerid){
+        if(playerid) {
+
+        } else {
+            socket.emit('new client', shortid.generate());
+        }
+    });
+
+
+    // Broadcast connection to OTHER clients
+    // TODO: check if this is just a reconnection with stored values for user
+    socket.broadcast.emit('hi');
+
+
+    // Handle a test event from a client
+    socket.on('test', function(msg){
+        console.log('message: ' + msg);
+    });
+
+    
+
+    // Handle user disconnecting
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });    
+});
+
+
+// Handle and event from a specific socket(user)
+io.on('test', function(socket) {
+
+})
+
+// Set the port for Heroku or local
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+// Listen on the port
+http.listen(port, function(){
+    console.log('listening on: ' + port);
+});
+
+
+// ===============================================================================
+//
+//  Code snippets
+//
+// ===============================================================================
+
     // console.log(socket);
 
     // Add the new ID to the player list
@@ -26,23 +80,11 @@ io.on('connection', function(socket){
 
     // console.log(playerList);
 
-    // socket.on('disconnect', function(){
-    //     console.log('user disconnected');
+
+
+    // socket.on('chat message', function(msg){
+    //     console.log('message: ' + msg);
+    //     io.emit('chat message out', msg);
     // });
 
-    socket.on('chat message', function(msg){
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
-    });
-
     // socket.broadcast.emit('hi');
-});
-console.log(process.env.PORT);
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 3000;
-}
-
-http.listen(port, function(){
-    console.log('listening on *:3000');
-});

@@ -6,8 +6,8 @@ sass.compiler = require('node-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 
-// const browserSync = require('browser-sync');
-// const server = browserSync.create();
+const browserSync = require('browser-sync');
+const server = browserSync.create();
 
 // function rootFiles() {
 //     return src(['index.js',
@@ -25,11 +25,11 @@ const concat = require('gulp-concat');
 
 function scripts() {
     return src(['scripts/main.js',
-                'scripts/connections.js'
+                'scripts/connection.js'
     ])
     .pipe(plumber())
     .pipe(concat('custom.min.js'))
-    .pipe(dest('./public'));
+    .pipe(dest('./public/scripts/'));
     // .pipe(dest('./dist/public'));
 }
 
@@ -43,8 +43,8 @@ function scripts() {
 
 // function serve(cb) {
 //     server.init({
-//         proxy: 'http://www.hackerkitchens.test/',
-//         port: 4000
+//         proxy: 'http://localhost:3000/',
+//         port: 3000
 //     });
 //     cb();
 // }
@@ -54,17 +54,15 @@ function scripts() {
 //     cb();
 // }
 
-// function watching(cb) {
-//     watch(['./sass/**/*.scss', 
-//             './template-parts/*.php',
-//             './*.php',
-//             './js/modules/*.js'],
-//             {delay: 500 },
-//             series(scripts, styles, reload));
+function watching(cb) {
+    watch(['./index.html', 
+            './scripts/*.js'],
+            {delay: 500 },
+            series(scripts));
 
-//     cb();
-// }
+    cb();
+}
   
 // exports.default = series(scripts, styles, serve, watching);
 
-exports.default = series(scripts);
+exports.default = series(scripts, watching);
