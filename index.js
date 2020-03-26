@@ -10,7 +10,9 @@ app.use(express.static('public'));
 
 app.get('/', function(req, res){
     //   res.send('<h1>Hello world</h1>');
+    console.log('is this happening');
     res.sendFile(__dirname + '/index.html');
+
 });
 
 io.on('connection', function(socket){
