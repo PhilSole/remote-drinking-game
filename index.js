@@ -36,6 +36,6 @@ io.on('connection', function(socket){
     // socket.broadcast.emit('hi');
 });
 
-http.listen(80, function(){
+http.listen(3000, function(){
     console.log('listening on *:3000');
 });
