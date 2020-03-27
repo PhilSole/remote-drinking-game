@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
     console.log('a connection was detected');
 
-    socket.on('client connection', function(playerid){
+    socket.on('credentials', function(playerid){
         if(playerid) {
 
         } else {

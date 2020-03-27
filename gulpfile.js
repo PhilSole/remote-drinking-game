@@ -33,13 +33,13 @@ function scripts() {
     // .pipe(dest('./dist/public'));
 }
 
-// function styles() {
-//     return src('sass/style.scss')
-//         .pipe(plumber())
-//         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-//         .pipe(autoprefixer('last 2 versions'))
-//         .pipe(dest('./'));
-// }
+function styles() {
+    return src('styles/style.scss')
+        .pipe(plumber())
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(autoprefixer('last 2 versions'))
+        .pipe(dest('./public/styles/'));
+}
 
 // function serve(cb) {
 //     server.init({
@@ -55,14 +55,15 @@ function scripts() {
 // }
 
 function watching(cb) {
-    watch(['./index.html', 
+    watch(['./index.html',
+            './styles/**/*.scss',
             './scripts/*.js'],
             {delay: 500 },
-            series(scripts));
+            series(scripts, styles));
 
     cb();
 }
   
 // exports.default = series(scripts, styles, serve, watching);
 
-exports.default = series(scripts, watching);
+exports.default = series(scripts, styles, watching);

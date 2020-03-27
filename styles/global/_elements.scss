@@ -1,0 +1,47 @@
+html {
+    height: 100%;
+    font-size: 16px;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $font_main;
+}
+
+h1,h2,h3,h4 {
+    margin: 0 auto .5em;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+
+
+button {
+    background: yellow;
+    border: none;
+    padding: 18px 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: .25em;
+    display: block;
+    cursor: pointer;
+    transition: all .1s ease;
+
+    &:hover {
+        background: black;
+        color: yellow;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+}

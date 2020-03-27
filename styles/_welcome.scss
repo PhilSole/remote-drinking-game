@@ -1,0 +1,25 @@
+body.home {
+    .header-wrap {
+        padding: 18px;
+    
+        h1 {
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    }
+    
+    .logo-wrap {
+        .inner {
+            width: 260px;
+            margin: 0 auto;
+        }
+    }
+
+    .button-start {
+        margin: 18px auto;
+    }
+}
