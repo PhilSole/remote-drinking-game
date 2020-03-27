@@ -5,10 +5,20 @@
 // ==================================================================
 
 // Global variable to namespace modules
-codrink19 = {};
+let codrink19 = {};
 
+// Global DOM variables
+let $body;
+
+// Global objects
 let socket;
 
 $(document).ready(function() {
+
+    // Assign global DOM variables
+    $body = $('body');
+
+    // Initialise modules
     codrink19.connection.init();
+    codrink19.startGame.init();
 });

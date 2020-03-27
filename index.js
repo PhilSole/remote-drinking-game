@@ -13,7 +13,14 @@ app.use(express.static(path.join(__dirname, 'socket.io')));
 
 // Handle request to root
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+    let reqRoom = req.param('room');
+
+    if(!reqRoom) {
+        res.sendFile(__dirname + '/index.html');
+    } else {
+        res.sendFile(__dirname + '/views/waiting-room.html');   
+    }
+
 });
 
 // Handle a connection to the app. 
@@ -41,7 +48,6 @@ io.on('connection', function(socket){
         console.log('message: ' + msg);
     });
 
-    
 
     // Handle user disconnecting
     socket.on('disconnect', function(){

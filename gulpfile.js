@@ -25,7 +25,9 @@ const server = browserSync.create();
 
 function scripts() {
     return src(['scripts/main.js',
-                'scripts/connection.js'
+                'scripts/connection.js',
+                'scripts/start-game.js',
+                'scripts/waiting-room.js'
     ])
     .pipe(plumber())
     .pipe(concat('custom.min.js'))

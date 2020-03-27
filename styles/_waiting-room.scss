@@ -1,0 +1,33 @@
+body.waiting-room {
+
+}
+
+.waiting-list-wrap {
+    .inner {
+        width: 640px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 24px 18px;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    button {
+        margin-left: 24px;
+    }
+
+    h2 {
+        margin: 1em 0;
+        padding: 18px 24px;
+    }
+
+    @media screen and (max-width: 639px) {
+        button {
+            width: calc(100% - 36px);
+            margin: 24px;
+        }        
+    }
+}

@@ -1,9 +1,8 @@
 body.home {
     .header-wrap {
-        padding: 18px;
+        padding: 0 18px;
     
         h1 {
-            text-align: center;
             margin-bottom: 0;
         }
 
@@ -15,11 +14,13 @@ body.home {
     .logo-wrap {
         .inner {
             width: 260px;
-            margin: 0 auto;
+            max-width: 66%;
+            margin: 24px auto 0;
         }
     }
 
     .button-start {
-        margin: 18px auto;
+        display: block;
+        margin: 24px auto 0;
     }
 }
