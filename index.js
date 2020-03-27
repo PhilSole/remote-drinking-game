@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 var path = require('path');
 const shortid = require('shortid');
 
-let gamesList = [];
+let gamesList = {};
 
 // Make the 'public' directory able to serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,13 +31,13 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
     console.log('a connection was detected');
 
-    socket.on('new game request', function(){
-        gamesList.push(socket.id);
+    socket.on('new game request', function(name){
+        gamesList[socket.id] = [{id:socket.id, name:name}];
         console.log(gamesList);
     });
 
     socket.on('credentials', function(playerRoom){
-        if(gamesList.indexOf(playerRoom) > -1) {
+        if(playerRoom in gamesList) {
             socket.emit('room check', true);
         } else {
             socket.emit('room check', false);   
