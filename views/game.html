@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CODRINK-19 — Drinking Room</title>
+        <title>CODRINK-19 — drinking Game</title>
 
         <!-- Begin favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -14,35 +14,18 @@
         <meta name="theme-color" content="#ffffff">
         <!-- End favicon -->
 
+        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap" rel="stylesheet">
 
+        <!-- Custom styles -->
         <link rel="stylesheet" href="/styles/style.css">
     </head>
-    <body class="waiting-room">
-        <header class="header-wrap">
-            <h1>Waiting Room</h1>
-        </header>
-        
-        <div class="nickname-form-wrap">
-            <div class="inner">
-                <form class="formPlayer" action="">
-                    <label for="playerName">Your nickname</label>
-                    <input id="playerName" autocomplete="off" />
-                    <div class="form-feedback"></div>
-                    <button>Submit</button>
-                </form>
-            </div>
-        </div>
 
-        <div class="waiting-list-wrap">
-            <div class="inner">
-                <h2>1 player</h2>
-                <ul id="waitingList"></ul>
-                <p>Share this link with your friends so they can join the game:</p>
-                <p class="share-link"></p>
-                <button class="begin">Click when ready</button>
-            </div>
-        </div>
+    <body class="home">
+        <header class="header-wrap">
+            <h1>Go!</h1>
+        </header>
+
 
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>

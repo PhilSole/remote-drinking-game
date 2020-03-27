@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 var path = require('path');
 const shortid = require('shortid');
 
-let playerList = [];
+let gamesList = [];
 
 // Make the 'public' directory able to serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
@@ -13,12 +13,14 @@ app.use(express.static(path.join(__dirname, 'socket.io')));
 
 // Handle request to root
 app.get('/', function(req, res){
-    let reqRoom = req.param('room');
+    let reqGame = req.query.game;
 
-    if(!reqRoom) {
-        res.sendFile(__dirname + '/index.html');
+    if(!reqGame) {
+        res.sendFile(__dirname + '/views/index.html');
+    } else if(reqGame === 'new') {
+        res.sendFile(__dirname + '/views/waiting-room.html');
     } else {
-        res.sendFile(__dirname + '/views/waiting-room.html');   
+        res.sendFile(__dirname + '/views/game.html');
     }
 
 });
@@ -29,11 +31,16 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
     console.log('a connection was detected');
 
-    socket.on('credentials', function(playerid){
-        if(playerid) {
+    socket.on('new game request', function(){
+        gamesList.push(socket.id);
+        console.log(gamesList);
+    });
 
+    socket.on('credentials', function(playerRoom){
+        if(gamesList.indexOf(playerRoom) > -1) {
+            socket.emit('room check', true);
         } else {
-            socket.emit('new client', shortid.generate());
+            socket.emit('room check', false);   
         }
     });
 
@@ -71,26 +78,3 @@ if (port == null || port == "") {
 http.listen(port, function(){
     console.log('listening on: ' + port);
 });
-
-
-// ===============================================================================
-//
-//  Code snippets
-//
-// ===============================================================================
-
-    // console.log(socket);
-
-    // Add the new ID to the player list
-    // playerList.push(socket.id);
-
-    // console.log(playerList);
-
-
-
-    // socket.on('chat message', function(msg){
-    //     console.log('message: ' + msg);
-    //     io.emit('chat message out', msg);
-    // });
-
-    // socket.broadcast.emit('hi');

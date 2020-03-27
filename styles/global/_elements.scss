@@ -1,12 +1,16 @@
 html {
     height: 100%;
     font-size: 16px;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 body {
     height: 100%;
     margin: 0;
-    box-sizing: border-box;
     font-family: $font_main;
     line-height: 1.25;
 }
@@ -17,7 +21,7 @@ h1,h2,h3,h4 {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3.75rem;
     text-align: center;
 
     @media screen and (max-width: 479px) {
@@ -27,13 +31,11 @@ h1 {
 
 h2 {
     font-size: 1.5rem;
+    text-align: center;
 
     @media screen and (max-width: 479px) {
         font-size: 1.25rem;
     }
-}
-
-form {
 }
 
 button {
@@ -62,13 +64,18 @@ input {
     padding: 18px 24px;
     vertical-align: top;
     border: none;
-    border-bottom: 4px dotted;
+    border-bottom: 6px dotted;
     font-size: 1.125rem;
     width: 200px;
+    background-color: #f9f9f9;
+
+    @media screen and (max-width: 479px) {
+        width: 100%;
+    }
 }
 
 label {
-    padding: 18px 24px;
+    padding: 18px 24px 18px 0;
     font-size: 1.25rem;
     vertical-align: top;
     display: inline-block;

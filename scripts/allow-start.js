@@ -3,7 +3,7 @@
 //  This module handles a game being created
 //
 // ==================================================================
-codrink19.startGame = function() {
+codrink19.allowStart = function() {
 
     let $buttonStart;
     
@@ -12,14 +12,9 @@ codrink19.startGame = function() {
 
         $buttonStart.on('click', function() {
 
-            let roomID = socket.id;
+            let gameURL = location.protocol + '//' + location.host + '/?game=new';
 
-            console.log(location.host);
-
-            let gameURL = location.host + '/?room=' + socket.id;
-
-            console.log(gameURL);
-
+            window.location = gameURL;
         });
         
     }

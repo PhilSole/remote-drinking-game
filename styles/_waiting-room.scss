@@ -1,13 +1,15 @@
 body.waiting-room {
-
+    .header-wrap {
+        padding: 0 18px;
+    }
 }
 
-.waiting-list-wrap {
+.nickname-form-wrap, .waiting-list-wrap {
     .inner {
         width: 640px;
         max-width: 100%;
         margin: 0 auto;
-        padding: 24px 18px;
+        padding: 0 18px;
     }
 
     form {
@@ -21,13 +23,30 @@ body.waiting-room {
 
     h2 {
         margin: 1em 0;
-        padding: 18px 24px;
     }
 
     @media screen and (max-width: 639px) {
         button {
-            width: calc(100% - 36px);
-            margin: 24px;
+            margin: 24px 0 0;
+            width: 100%;
         }        
+    }
+}
+
+.nickname-form-wrap {
+    &.hide {
+        display: none;
+    }
+}
+
+.waiting-list-wrap {
+    display: none;
+
+    &.show {
+        display: block;
+    }
+
+    .begin {
+        display: none;
     }
 }

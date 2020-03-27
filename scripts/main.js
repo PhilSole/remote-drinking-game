@@ -20,5 +20,9 @@ $(document).ready(function() {
 
     // Initialise modules
     codrink19.connection.init();
-    codrink19.startGame.init();
+
+    if($body.is('.waiting-room')) {
+        codrink19.waitingRoom.init();    
+    }
+    
 });
