@@ -111,6 +111,10 @@ codrink19.waitingRoom = function() {
             }
 
         });
+
+        $btnBegin.on('click', function() {
+            
+        });
         
     }
 
