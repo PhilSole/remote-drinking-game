@@ -5,7 +5,8 @@ var io = require('socket.io')(http);
 var path = require('path');
 const shortid = require('shortid');
 
-let gamesList = {};
+let playersList = [];
+let roomsList = [];
 
 // Make the 'public' directory able to serve static assets
 app.use(express.static(path.join(__dirname, 'public')));
@@ -13,36 +14,102 @@ app.use(express.static(path.join(__dirname, 'socket.io')));
 
 // Handle request to root
 app.get('/', function(req, res){
-    let reqGame = req.query.game;
+    let reqRoom = req.query.room;
 
-    if(!reqGame) {
+    if(!reqRoom) {
         res.sendFile(__dirname + '/views/index.html');
-    } else if(reqGame === 'new') {
-        res.sendFile(__dirname + '/views/waiting-room.html');
     } else {
-        res.sendFile(__dirname + '/views/game.html');
+        console.log('the root one');
+
+        res.sendFile(__dirname + '/views/waiting-room.html');
     }
 
 });
+
+// Handle request for new game
+app.get('/new-game', function(req, res){
+    res.sendFile(__dirname + '/views/waiting-room.html');
+});
+
+// Handle request to join game
+app.get('/join', function(req, res){
+    let reqRoom = req.query.room;
+
+    console.log('the join root here');
+
+    res.sendFile(__dirname + '/views/waiting-room.html');
+    res.redirect('/?room=' + reqRoom);
+});
+
+
+
+// setInterval(() => {
+//     console.log(playersList, roomsList);
+// }, 10000);
 
 // Handle a connection to the app. 
 // Create a new player OR
 // Match it to an existing player if it's a reconnection.
 io.on('connection', function(socket){
-    console.log('a connection was detected');
+    console.log('a connection was detected ID: ' + socket.id);
 
-    socket.on('new game request', function(name){
-        gamesList[socket.id] = [{id:socket.id, name:name}];
-        console.log(gamesList);
+    // New game requested from the waiting room by new player
+    socket.on('new game request', function(data){
+
+        console.log('new game requested so push data to server arrays');
+        let name = data['name'];
+        let room = data['room'];
+
+        playersList.push({id:socket.id, name:name, room:room, turn:'true'});
+        roomsList.push(room);
+
+        socket.join(room);
+
+        console.log(playersList, roomsList);
+
+    });
+
+    // A player enters the waiting room and can see who's there
+    socket.on('see waiting room', function(room){
+        console.log(room);
+
+        let otherPlayers = playersList.filter(player => player['room'] === room);
+        
+        console.log(otherPlayers);
+
+        socket.emit('current players', otherPlayers);   
+    });
+
+    // Joining player has submitted name to actually join the room
+    socket.on('join room', function(data){
+        console.log('actually joining room with name');
+        let name = data['name'];
+        let room = data['room'];
+
+        console.log(name, room, 'will these work?');
+
+        playersList.push({id:socket.id, name:name, room:room, turn:'false'});
+
+        console.log(playersList);
+
+        socket.join(room);
+        socket.emit('new member', playersList);
+        socket.to(room).emit('new member', playersList);
+
     });
 
     socket.on('credentials', function(playerRoom){
-        if(playerRoom in gamesList) {
-            socket.emit('room check', true);
-        } else {
-            socket.emit('room check', false);   
-        }
+        console.log('there are some credentials');
+
     });
+
+    // Handle user disconnecting
+    socket.on('disconnect', function(){
+        console.log('user disconnected with ID: ' + socket.id);
+
+
+
+    }); 
 
 
     // Broadcast connection to OTHER clients
@@ -54,12 +121,7 @@ io.on('connection', function(socket){
     socket.on('test', function(msg){
         console.log('message: ' + msg);
     });
-
-
-    // Handle user disconnecting
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });    
+   
 });
 
 

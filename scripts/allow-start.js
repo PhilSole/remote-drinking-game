@@ -12,7 +12,7 @@ codrink19.allowStart = function() {
 
         $buttonStart.on('click', function() {
 
-            let gameURL = location.protocol + '//' + location.host + '/?game=new';
+            let gameURL = location.protocol + '//' + location.host + '/new-game';
 
             window.location = gameURL;
         });

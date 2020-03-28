@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/PhilSole/remote-drinking-game/issues"
   },
-  "homepage": "https://github.com/PhilSole/remote-drinking-game#readme"
+  "homepage": "https://github.com/PhilSole/remote-drinking-game#readme",
+  "engines": {
+    "node": "12.16.x"
+  }
 }

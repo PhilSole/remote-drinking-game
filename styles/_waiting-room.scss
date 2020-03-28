@@ -37,6 +37,10 @@ body.waiting-room {
     &.hide {
         display: none;
     }
+
+    .form-feedback {
+        margin-top: 24px;
+    }
 }
 
 .waiting-list-wrap {
@@ -48,5 +52,21 @@ body.waiting-room {
 
     .begin {
         display: none;
+        margin: 24px auto;
+
+        &.show {
+            display: block;
+        }
+    }
+
+    .share-wrap {
+        &.hide {
+            display: none;
+        }
+    }
+
+    .share-link {
+        width: 100%;
+        border: none;
     }
 }

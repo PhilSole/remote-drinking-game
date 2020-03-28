@@ -19,13 +19,6 @@ codrink19.connection = function() {
             codrink19.allowStart.init();
         }
 
-        socket.on('room check', function(available) {
-            if(available) {
-                console.log('the room is available');
-            } else {
-                codrink19.allowStart.init();
-            }
-        });
     }
 
     return {
