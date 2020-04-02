@@ -7,10 +7,8 @@ codrink19.waitingRoom = function() {
 
     let $formWrap, $form, $playerName;
     let $waitingWrap, $waitingList, $shareWrap, $shareLink, $roomCount, $btnBegin;
-
-    let urlParams, joiningID;
     
-    let init = function() {
+    let init = function(roomID = false) {
         
         $formWrap = $body.find('.nickname-form-wrap');
         $form = $formWrap.find('.formPlayer');
@@ -22,85 +20,85 @@ codrink19.waitingRoom = function() {
         $roomCount = $waitingWrap.find('.room-count');
         $btnBegin = $waitingWrap.find('.begin');
 
-        // CHecking if this visitor has been sent here via a share link with query param for room ID
-        urlParams = new URLSearchParams(window.location.search);
-        joiningID = urlParams.get('room');
+        // Initialise socket.io-client
+        socket = io();
 
-        console.log(joiningID);
+        // Wait for connection to ensure communication possible
+        socket.on('connect', (e) => {
+            console.log('client: connect');
 
-        // Either joining an existing room or creating a new one
-        if(joiningID) {
-            socket.emit('see waiting room', joiningID);
-            $shareWrap.addClass('hide');
-        } else {
-            console.log('no joining ID');
-        }
-
-        $form.on('submit', function(e) {
-            e.preventDefault();
-
-            // Get the 'name' value from the form and validate it
-            let nickname = $playerName.val();
-            if(nickname) {
-                // Set local storage values for player ID and name
-                localStorage.setItem('playerID', socket.id);
-                localStorage.setItem('playerName', nickname);
-
-                if(!joiningID) {
-
-                    // New game so give it an ID
-                    let newRoomID = Math.random().toString(36).slice(-6);
-                    localStorage.setItem('playerRoom', newRoomID);
-
-                    // Emit a socket event with new player name and room
-                    socket.emit('new game request', {name: nickname, room: newRoomID});
-
-                    // Construct the game share link
-                    let gameURL = location.protocol + '//' + location.host + '/join?room=' + newRoomID;
-
-                    // Update the view
-                    $formWrap.addClass('hide');
-                    $waitingList.append('<li>' + nickname + '</li>');
-                    $shareLink.val(gameURL);
+            // Either joining an existing room or creating a new one
+            if(roomID) {
+                socket.emit('see waiting room', roomID, function(otherplayers) {
+                    otherplayers.forEach(player => {
+                        $waitingList.append('<li>' + player['name'] + '</li>');    
+                    });
                     $waitingWrap.addClass('show');
-                } else {
-                    // Existing game so room given
-                    localStorage.setItem('playerRoom', joiningID);
-
-                    // Emit a socket event with new player name and the room to join
-                    socket.emit('join room', { name: nickname, room: joiningID });
-
-                    // Update the view
-                    $formWrap.addClass('hide');
-                }
-
-
-            } else {
-                $form.find('.form-feedback').html('But what will we call you?');
-                $playerName.one('change', function() {
-                    $form.find('.form-feedback').html('');
                 });
+
+                $shareWrap.addClass('hide');
+            } else {
+                console.log('no room ID to join');
             }
+
+            $form.on('submit', function(e) {
+                e.preventDefault();
+    
+                // Get the 'name' value from the form and validate it
+                let nickname = $playerName.val();
+                if(nickname) {
+                    if(!roomID) {
+    
+                        // New game so give it an ID
+                        let newRoomID = Math.random().toString(36).slice(-6);
+
+                        // Emit a socket event with new player name and room
+                        socket.emit('new game request', {name: nickname, room: newRoomID}, function() {
+                            // Set local storage values for player ID and name
+                            localStorage.setItem('playerID', socket.id);
+                            localStorage.setItem('playerName', nickname);
+                            localStorage.setItem('playerRoom', newRoomID);
+                        });
+    
+                        // Construct the game share link
+                        let gameURL = location.protocol + '//' + location.host + '/join?room=' + newRoomID;
+    
+                        // Update the view
+                        $formWrap.addClass('hide');
+                        $waitingList.append('<li>' + nickname + '</li>');
+                        $shareLink.val(gameURL);
+                        $waitingWrap.addClass('show');
+                    } else {                        
+    
+                        // Emit a socket event with new player name and the room to join
+                        socket.emit('join room', { name: nickname, room: roomID }, function(players) {
+                            // Set local storage values for player ID and name Existing game so room given
+                            localStorage.setItem('playerID', socket.id);
+                            localStorage.setItem('playerName', nickname);
+                            localStorage.setItem('playerRoom', roomID);
+                            
+                            updateWaitingList(players);
+                        });
+    
+                        // Update the view
+                        $formWrap.addClass('hide');
+                    }
+    
+    
+                } else {
+                    $form.find('.form-feedback').html('But what will we call you?');
+                    $playerName.one('change', function() {
+                        $form.find('.form-feedback').html('');
+                    });
+                }
+            });            
+
         });
 
-        // Player hasn't actually joined room yet but show other players
-        socket.on('current players', function(players) {
-            console.log('current players emitted event');
-
-            players.forEach(player => {
-                $waitingList.append('<li>' + player['name'] + '</li>');    
-            });
-
-            $waitingWrap.addClass('show');
-        });
-
-        socket.on('new member', function(players) {
-            console.log('new member emitted event with: ', players);
-
+        function updateWaitingList(players) {
             $waitingList.html('');
             
             players.forEach(player => {
-                console.log(player);
                 $waitingList.append('<li>' + player['name'] + '</li>');    
             });
 
@@ -109,7 +107,11 @@ codrink19.waitingRoom = function() {
             if(players.length > 1) {
                 $btnBegin.addClass('show');
             }
+        }
 
+        socket.on('new member', function(players) {
+            console.log('new member emitted event with: ', players);
+            updateWaitingList(players);
         });
 
         $btnBegin.on('click', function() {

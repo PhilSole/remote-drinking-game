@@ -25,8 +25,7 @@ const server = browserSync.create();
 
 function scripts() {
     return src(['scripts/main.js',
-                'scripts/connection.js',
-                'scripts/allow-start.js',
+                'scripts/welcome.js',
                 'scripts/waiting-room.js'
     ])
     .pipe(plumber())

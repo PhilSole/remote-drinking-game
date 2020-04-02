@@ -9,20 +9,31 @@ let codrink19 = {};
 
 // Global DOM variables
 let $body;
+let $viewHome, $viewWaiting, $viewGame;
 
 // Global objects
 let socket;
 
+
+// Kickoff when the document is ready
 $(document).ready(function() {
 
     // Assign global DOM variables
     $body = $('body');
+    $viewHome = $body.find('.view.home');
+    $viewWaiting = $body.find('.view.waiting-room');
+    $viewGame = $body.find('.view.game');
 
-    // Initialise modules
-    codrink19.connection.init();
+    // Check if new game or join game scenario
+    let urlParams = new URLSearchParams(window.location.search);
+    let roomID = urlParams.get('room');
 
-    if($body.is('.waiting-room')) {
-        codrink19.waitingRoom.init();    
-    }
-    
+    if(!roomID) {
+        codrink19.welcome.init();    
+    } else {
+        codrink19.waitingRoom.init(roomID);
+
+        $viewHome.removeClass('active');
+        $viewWaiting.addClass('active');
+    }    
 });

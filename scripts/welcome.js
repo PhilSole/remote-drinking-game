@@ -1,22 +1,21 @@
 // ==================================================================
 //
-//  This module handles a game being created
+//  This module handles new visitors who are not joining another game
 //
 // ==================================================================
-codrink19.allowStart = function() {
-
+codrink19.welcome = function() {
     let $buttonStart;
-    
+
     let init = function() {
+
         $buttonStart = $body.find('.button-start');
 
         $buttonStart.on('click', function() {
+            codrink19.waitingRoom.init();
 
-            let gameURL = location.protocol + '//' + location.host + '/new-game';
-
-            window.location = gameURL;
+            $viewHome.removeClass('active');
+            $viewWaiting.addClass('active');
         });
-        
     }
 
     return {
