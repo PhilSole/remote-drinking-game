@@ -60,15 +60,13 @@ io.on('connection', function(socket){
 
     // New game requested from the waiting room by new player
     socket.on('new game request', function(data, acknowledge){
-
         let name = data['name'];
         let room = data['room'];
 
-        playersList.push({id:socket.id, name:name, room:room, turn:'true'});
-        roomsList.push(room);
+        playersList.push({id:socket.id, name:name, room:room});
+        roomsList.push({id:room, started:false});
 
         socket.join(room);
-
         acknowledge();
     });
 
@@ -89,6 +87,30 @@ io.on('connection', function(socket){
         acknowledge(playersList);
         socket.to(room).emit('new member', playersList);        
     });
+
+    // A player has clicked the start button
+    socket.on('start game request', function(roomID, acknowledge){
+        let roomObject = roomsList.filter(room => room['id'] === roomID);
+        if(!roomObject['started']) {
+            roomObject['started'] = true;
+
+            let startingPlayer = playersList.filter(player => player['id'] === socket.id);
+            startingPlayer['turn'] = true;
+
+            socket.to(roomID).emit('game start');
+            acknowledge();   
+        }
+    });
+
+
+
+
+
+
+
+
+
+
 
     socket.on('credentials', function(playerRoom){
         console.log('there are some credentials');

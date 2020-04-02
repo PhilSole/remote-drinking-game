@@ -7,6 +7,8 @@ codrink19.waitingRoom = function() {
 
     let $formWrap, $form, $playerName;
     let $waitingWrap, $waitingList, $shareWrap, $shareLink, $roomCount, $btnBegin;
+
+    let playerData = {};
     
     let init = function(roomID = false) {
         
@@ -54,10 +56,8 @@ codrink19.waitingRoom = function() {
 
                         // Emit a socket event with new player name and room
                         socket.emit('new game request', {name: nickname, room: newRoomID}, function() {
-                            // Set local storage values for player ID and name
-                            localStorage.setItem('playerID', socket.id);
-                            localStorage.setItem('playerName', nickname);
-                            localStorage.setItem('playerRoom', newRoomID);
+                            // Set in-memory and local storage values for player ID and name
+                            setPlayerData(socket.id, nickname, newRoomID);
                         });
     
                         // Construct the game share link
@@ -73,10 +73,7 @@ codrink19.waitingRoom = function() {
                         // Emit a socket event with new player name and the room to join
                         socket.emit('join room', { name: nickname, room: roomID }, function(players) {
                             // Set local storage values for player ID and name Existing game so room given
-                            localStorage.setItem('playerID', socket.id);
-                            localStorage.setItem('playerName', nickname);
-                            localStorage.setItem('playerRoom', roomID);
-                            
+                            setPlayerData(socket.id, nickname, roomID);
                             updateWaitingList(players);
                         });
     
@@ -91,9 +88,33 @@ codrink19.waitingRoom = function() {
                         $form.find('.form-feedback').html('');
                     });
                 }
-            });            
+            });
+            
+            socket.on('new member', function(players) {
+                updateWaitingList(players);
+            });
+    
+            $btnBegin.on('click', function() {
+                socket.emit('start game request', playerData.room, function() {
+                    startGame();
+                });
+            });
+            
+            socket.on('game start', function() {
+                startGame();
+            });
 
         });
+
+        function setPlayerData(id, name, room) {
+            playerData.id = id;
+            playerData.name = name;
+            playerData.room = room;
+
+            localStorage.setItem('playerID', id);
+            localStorage.setItem('playerName', name);
+            localStorage.setItem('playerRoom', room);
+        }
 
         function updateWaitingList(players) {
             $waitingList.html('');
@@ -109,15 +130,12 @@ codrink19.waitingRoom = function() {
             }
         }
 
-        socket.on('new member', function(players) {
-            console.log('new member emitted event with: ', players);
-            updateWaitingList(players);
-        });
+        function startGame() {
+            codrink19.game.init();
 
-        $btnBegin.on('click', function() {
-            
-        });
-        
+            $viewWaiting.removeClass('active');
+            $viewGame.addClass('active');
+        }
     }
 
     return {
