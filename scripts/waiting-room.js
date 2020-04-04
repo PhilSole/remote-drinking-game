@@ -7,8 +7,6 @@ codrink19.waitingRoom = function() {
 
     let $formWrap, $form, $playerName;
     let $waitingWrap, $waitingList, $shareWrap, $shareLink, $roomCount, $btnBegin;
-
-    let playerData = {};
     
     let init = function(roomID = false) {
         
@@ -95,15 +93,20 @@ codrink19.waitingRoom = function() {
             });
     
             $btnBegin.on('click', function() {
-                socket.emit('start game request', playerData.room, function() {
-                    startGame();
+                socket.emit('start game request', playerData.room, function(allPlayers, roomobject, minigames) {
+                    codrink19.game.init(allPlayers, roomobject, minigames);
                 });
             });
             
-            socket.on('game start', function() {
-                startGame();
+            socket.on('game start', function(allPlayers, roomobject) {
+                codrink19.game.init(allPlayers, roomobject);
             });
 
+            $playerName.focus();
+
+            // Waiting room is ready so transition views
+            $viewHome.removeClass('active');
+            $viewWaiting.addClass('active');
         });
 
         function setPlayerData(id, name, room) {
@@ -128,13 +131,6 @@ codrink19.waitingRoom = function() {
             if(players.length > 1) {
                 $btnBegin.addClass('show');
             }
-        }
-
-        function startGame() {
-            codrink19.game.init();
-
-            $viewWaiting.removeClass('active');
-            $viewGame.addClass('active');
         }
     }
 

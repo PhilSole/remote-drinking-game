@@ -12,9 +12,6 @@ codrink19.welcome = function() {
 
         $buttonStart.on('click', function() {
             codrink19.waitingRoom.init();
-
-            $viewHome.removeClass('active');
-            $viewWaiting.addClass('active');
         });
     }
 

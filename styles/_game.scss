@@ -1,0 +1,37 @@
+.view.game {
+    .up-next-wrap {
+        position: fixed;
+        right: 18px;
+        top: 12px;
+    }
+
+    .your-turn-message {
+        display: none;
+        text-align: center;
+        margin-top: 60px;
+
+        &.show {
+            display: block;
+        }
+    }
+
+    .waiting-for-message {
+        display: none;
+        text-align: center;
+        margin-top: 60px;
+
+        &.show {
+            display: block;
+        }
+    }
+
+    .container-subgame {
+        .description {
+            p {
+                width: 480px;
+                max-width: 100%;
+                margin: auto;
+            }
+        }
+    }
+}

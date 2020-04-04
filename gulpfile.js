@@ -43,6 +43,11 @@ function styles() {
         .pipe(dest('./public/styles/'));
 }
 
+function data() {
+    return src('data/*.json')
+        .pipe(dest('./public/data/'));
+}
+
 // function serve(cb) {
 //     server.init({
 //         proxy: 'http://localhost:3000/',
@@ -59,13 +64,14 @@ function styles() {
 function watching(cb) {
     watch(['./index.html',
             './styles/**/*.scss',
-            './scripts/*.js'],
+            './scripts/*.js',
+            './data/*.json'],
             {delay: 500 },
-            series(scripts, styles));
+            series(scripts, styles, data));
 
     cb();
 }
   
 // exports.default = series(scripts, styles, serve, watching);
 
-exports.default = series(scripts, styles, watching);
+exports.default = series(scripts, styles, data, watching);

@@ -14,6 +14,8 @@ let $viewHome, $viewWaiting, $viewGame;
 // Global objects
 let socket;
 
+let playerData = {};
+
 
 // Kickoff when the document is ready
 $(document).ready(function() {

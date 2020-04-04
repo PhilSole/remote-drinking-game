@@ -6,6 +6,8 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var path = require('path');
+// var fs = require("fs");
+
 
 let playersList = [];
 let roomsList = [];
@@ -81,7 +83,7 @@ io.on('connection', function(socket){
         let name = data['name'];
         let room = data['room'];
 
-        playersList.push({id:socket.id, name:name, room:room, turn:'false'});
+        playersList.push({id:socket.id, name:name, room:room});
 
         socket.join(room);
         acknowledge(playersList);
@@ -90,15 +92,18 @@ io.on('connection', function(socket){
 
     // A player has clicked the start button
     socket.on('start game request', function(roomID, acknowledge){
-        let roomObject = roomsList.filter(room => room['id'] === roomID);
+        let roomObject = roomsList.filter(room => room['id'] === roomID)[0];
         if(!roomObject['started']) {
             roomObject['started'] = true;
+            
+            roomObject['turn'] = socket.id;
 
-            let startingPlayer = playersList.filter(player => player['id'] === socket.id);
-            startingPlayer['turn'] = true;
+            let allPlayers = playersList.filter(player => player['room'] === roomID);
 
-            socket.to(roomID).emit('game start');
-            acknowledge();   
+            socket.to(roomID).emit('game start', allPlayers, roomObject);
+
+            var dataMinigames = require(__dirname + '/public/data/subgames.json');
+            acknowledge(allPlayers, roomObject, dataMinigames);    
         }
     });
 
