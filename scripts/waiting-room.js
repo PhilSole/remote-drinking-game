@@ -20,8 +20,7 @@ codrink19.waitingRoom = function() {
         $roomCount = $waitingWrap.find('.room-count');
         $btnBegin = $waitingWrap.find('.begin');
 
-        // Initialise socket.io-client
-        socket = io();
+
 
         // Wait for connection to ensure communication possible
         socket.on('connect', (e) => {

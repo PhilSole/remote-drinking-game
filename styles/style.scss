@@ -1,6 +1,10 @@
 @import "global/variables";
 @import "global/elements";
+@import "global/animations";
+@import "global/helpers";
 @import "global/views";
-@import "welcome";
-@import "waiting-room";
-@import "game";
+
+@import "views/home";
+@import "views/waiting-room";
+@import "views/game";
+@import "views/loading";

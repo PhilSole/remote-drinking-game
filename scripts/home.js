@@ -3,7 +3,7 @@
 //  This module handles new visitors who are not joining another game
 //
 // ==================================================================
-codrink19.welcome = function() {
+codrink19.home = function() {
     let $buttonStart;
 
     let init = function() {

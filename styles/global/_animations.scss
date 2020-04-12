@@ -1,0 +1,14 @@
+@keyframes blink {
+    0%   {opacity: 1;}
+    66%  {opacity: 1;}
+    67%  {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+@keyframes cubemove {
+    25% { transform: translateX(42px) rotate(-90deg) scale(0.7); } 
+    50% { transform: translateX(42px) translateY(42px) rotate(-179deg); } 
+    51% { transform: translateX(42px) translateY(42px) rotate(-180deg); } 
+    75% { transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.7); } 
+    100% { transform: rotate(-360deg); }
+}

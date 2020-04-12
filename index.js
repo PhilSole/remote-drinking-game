@@ -9,8 +9,21 @@ var path = require('path');
 // var fs = require("fs");
 
 
-let playersList = [];
-let roomsList = [];
+let playersList = [
+    {
+        id: '123',
+        nickname: 'Bob',
+        roomKey: 'abc',
+        timeout: {}
+    }
+];
+let roomsList = [
+    {
+        lock: 'abc',
+        started: true,
+        timeout: {}
+    }
+];
 
 
 // ===========================================================================================
@@ -24,18 +37,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //  Two main and a catch-all. One for new visitor and one for joining a room.
 // ===========================================================================================
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/join', function(req, res){
     let reqRoom = req.query.room;
 
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/index.html');
     res.redirect('/?room=' + reqRoom);
 });
 
 app.get('*', function(req, res){
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 
@@ -60,6 +73,51 @@ http.listen(port, function(){
 io.on('connection', function(socket){
     console.log('Connection: socket ID — ' + socket.id);
 
+
+
+    // Handle user disconnecting
+    socket.on('disconnect', function(){
+        console.log('user disconnected with ID: ' + socket.id);
+    });
+
+
+
+    // Handle user reconnection request
+    socket.on('request reconnection', function(requestID, acknowledge){
+
+        let playerData = playersList.filter(player => player['id'] === requestID);
+
+        // If the playerData exists the room must exist because all players in a room are deleted when the room is.
+        if(playerData.length === 1) {
+            playerData[0].id = socket.id;
+            socket.join(playerData.roomKey);
+
+
+
+
+
+            let roomObject = roomsList.filter(room => room['lock'] === playerData[0].roomKey)[0];
+            if(!roomObject['started']) {
+                    
+                let allPlayers = playersList.filter(player => player['roomKey'] === roomID);
+    
+                socket.to(roomID).emit('game start', allPlayers, roomObject);
+    
+                var dataMinigames = require(__dirname + '/public/data/subgames.json');
+                acknowledge(allPlayers, roomObject, dataMinigames);    
+            }
+
+
+
+
+
+        } else {
+            acknowledge(false);
+        }
+    });    
+
+
+
     // New game requested from the waiting room by new player
     socket.on('new game request', function(data, acknowledge){
         let name = data['name'];
@@ -72,11 +130,13 @@ io.on('connection', function(socket){
         acknowledge();
     });
 
+
     // A player enters the waiting room and can see who's there
     socket.on('see waiting room', function(room, showRoom){
         let otherPlayers = playersList.filter(player => player['room'] === room);
         showRoom(otherPlayers);
     });
+
 
     // Joining player has submitted name to actually join the room
     socket.on('join room', function(data, acknowledge){
@@ -121,8 +181,5 @@ io.on('connection', function(socket){
         console.log('there are some credentials');
     });
 
-    // Handle user disconnecting
-    socket.on('disconnect', function(){
-        console.log('user disconnected with ID: ' + socket.id);
-    }); 
+
 });

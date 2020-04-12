@@ -25,7 +25,8 @@ const server = browserSync.create();
 
 function scripts() {
     return src(['scripts/main.js',
-                'scripts/welcome.js',
+                'scripts/connection.js',
+                'scripts/home.js',
                 'scripts/waiting-room.js',
                 'scripts/game.js'
     ])

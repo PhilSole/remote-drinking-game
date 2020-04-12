@@ -9,7 +9,7 @@ let codrink19 = {};
 
 // Global DOM variables
 let $body;
-let $viewHome, $viewWaiting, $viewGame;
+let $viewHome, $viewWaiting, $viewGame, $viewLoading;
 
 // Global objects
 let socket;
@@ -19,23 +19,28 @@ let playerData = {};
 
 // Kickoff when the document is ready
 $(document).ready(function() {
+    console.log('app initialisation');
 
     // Assign global DOM variables
     $body = $('body');
     $viewHome = $body.find('.view.home');
     $viewWaiting = $body.find('.view.waiting-room');
     $viewGame = $body.find('.view.game');
+    $viewLoading = $body.find('.view.loading');
 
-    // Check if new game or join game scenario
+    // Check if query params
     let urlParams = new URLSearchParams(window.location.search);
-    let roomID = urlParams.get('room');
+    playerData.roomKey = urlParams.get('r');
 
-    if(!roomID) {
-        codrink19.welcome.init();    
-    } else {
-        codrink19.waitingRoom.init(roomID);
+    // Check if localStorage values
+    playerData.id = localStorage.getItem('id');
 
-        $viewHome.removeClass('active');
-        $viewWaiting.addClass('active');
-    }    
-});
+    // Initialise socket.io-client
+    socket = io(); 
+
+    socket.on('connect', (e) => {
+        if(playerData.id) {
+            codrink19.connection.reconnection();    
+        }
+    });
+}); 

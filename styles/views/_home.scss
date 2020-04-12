@@ -20,7 +20,18 @@
     }
 
     .button-start {
-        display: block;
+        display: none;
         margin: 24px auto 0;
+    }
+
+    .connecting-message {
+        p {
+            display: none;
+            text-align: center;
+        }
+
+        .ellipses {
+            animation: blink 1s linear infinite;
+        }
     }
 }
