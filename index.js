@@ -1,14 +1,17 @@
 // ===========================================================================================
 //  App vars
 // ===========================================================================================
-var express = require('express');
-var app = express();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
-var path = require('path');
+let express = require('express');
+let app = express();
+let http = require('http').createServer(app);
+let io = require('socket.io')(http);
+let path = require('path');
 // var fs = require("fs");
 
+// Minigames variable from json file
+const dataMinigames = require(__dirname + '/public/data/subgames.json');
 
+// Dummy data in global game data arrays
 let playersList = [
     {
         id: '123',
@@ -17,6 +20,7 @@ let playersList = [
         timeout: {}
     }
 ];
+
 let roomsList = [
     {
         lock: 'abc',
@@ -41,10 +45,11 @@ app.get('/', function(req, res){
 });
 
 app.get('/join', function(req, res){
-    let reqRoom = req.query.room;
+    let reqRoom = req.query.r;
+    let reqCreator = req.query.n;
 
     res.sendFile(__dirname + '/index.html');
-    res.redirect('/?room=' + reqRoom);
+    res.redirect('/?r=' + reqRoom + '&n=' + reqCreator);
 });
 
 app.get('*', function(req, res){
@@ -85,33 +90,23 @@ io.on('connection', function(socket){
     // Handle user reconnection request
     socket.on('request reconnection', function(requestID, acknowledge){
 
-        let playerData = playersList.filter(player => player['id'] === requestID);
+        let playerData = playersList.filter(player => player['id'] === requestID)[0];
 
         // If the playerData exists the room must exist because all players in a room are deleted when the room is.
-        if(playerData.length === 1) {
-            playerData[0].id = socket.id;
+        if(playerData) {
+            // Set the new ID and join the room again
+            playerData.id = socket.id;
             socket.join(playerData.roomKey);
 
+            // Collect updated game data for reconnecting player
+            let roomObject = roomsList.filter(room => room['lock'] === playerData.roomKey)[0];
+            let allPlayers = playersList.filter(player => player['roomKey'] === roomObject.lock);
 
-
-
-
-            let roomObject = roomsList.filter(room => room['lock'] === playerData[0].roomKey)[0];
-            if(!roomObject['started']) {
-                    
-                let allPlayers = playersList.filter(player => player['roomKey'] === roomID);
-    
-                socket.to(roomID).emit('game start', allPlayers, roomObject);
-    
-                var dataMinigames = require(__dirname + '/public/data/subgames.json');
-                acknowledge(allPlayers, roomObject, dataMinigames);    
-            }
-
-
-
-
+            // Callback with success value and game data
+            acknowledge(true, allPlayers, roomObject, dataMinigames);
 
         } else {
+            // The game doesn't exist anymore so need to delete local storage
             acknowledge(false);
         }
     });    

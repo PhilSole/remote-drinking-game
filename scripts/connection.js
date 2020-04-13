@@ -6,12 +6,11 @@
 codrink19.connection = function() {
 
     let reconnection = function() {
-        console.log('attempting reconnection');
 
-        socket.emit('request reconnection', playerData.id, function(gameExists) {
+        socket.emit('request reconnection', playerData.id, function(gameExists, allPlayers, roomObject, minigames) {
             
             if(gameExists) {
-                
+
             } else {
                 console.log('it doesnt');
             }
@@ -22,5 +21,5 @@ codrink19.connection = function() {
 
     return {
         reconnection: reconnection
-    } 
+    }
 }();

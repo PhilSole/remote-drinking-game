@@ -13,34 +13,60 @@ let $viewHome, $viewWaiting, $viewGame, $viewLoading;
 
 // Global objects
 let socket;
-
+let urlParams;
 let playerData = {};
+let roomData = {};
 
 
 // Kickoff when the document is ready
 $(document).ready(function() {
-    console.log('app initialisation');
+    // Save global DOM references
+    initDOMReferences();
 
-    // Assign global DOM variables
+    // Check for existing game data in URL or localStorage
+    getGameData();
+
+    // If there is game data, modify home
+    codrink19.home.init();
+
+    // Initialise socket.io-client
+    socket = io();
+
+    // Only direct when the socket connects
+    socket.on('connect', (e) => {
+        directVisitor();
+    });    
+    
+});
+
+function initDOMReferences() {
     $body = $('body');
     $viewHome = $body.find('.view.home');
     $viewWaiting = $body.find('.view.waiting-room');
     $viewGame = $body.find('.view.game');
     $viewLoading = $body.find('.view.loading');
+}
 
-    // Check if query params
-    let urlParams = new URLSearchParams(window.location.search);
-    playerData.roomKey = urlParams.get('r');
-
+function getGameData() {
     // Check if localStorage values
     playerData.id = localStorage.getItem('id');
 
-    // Initialise socket.io-client
-    socket = io(); 
+    // Check if no local storage ID, check query params for roomKey
+    if(!playerData.id) {
+        urlParams = new URLSearchParams(window.location.search);
+        playerData.roomKey = urlParams.get('r');
+    }
+}
 
-    socket.on('connect', (e) => {
-        if(playerData.id) {
-            codrink19.connection.reconnection();    
-        }
-    });
-}); 
+function directVisitor() {
+    console.log('erm');
+    // Direct based on data presence
+    if(playerData.id) {
+        // codrink19.connection.reconnection();    
+    } else if(playerData.roomKey) {
+        // No local storage but roomKey in query params
+    } else {
+        // No local storage or roomKey
+        codrink19.home.allowNewGame();
+    }
+}
