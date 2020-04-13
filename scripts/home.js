@@ -28,6 +28,8 @@ codrink19.home = function() {
             roomData.creator = urlParams.get('n');
             if(roomData.creator) {
                 $announcement.text(roomData.creator + ' invited you').addClass('show-block');
+            } else {
+                $announcement.text('Checking your invite').addClass('show-block');
             }
         }
     }
@@ -48,7 +50,7 @@ codrink19.home = function() {
         $buttonJoin.addClass('show-block');
 
         $buttonJoin.on('click', function() {
-            codrink19.waitingRoom.init();
+            codrink19.waitingRoom.init(playerData.roomKey);
         });        
     }
 

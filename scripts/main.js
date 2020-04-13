@@ -51,11 +51,9 @@ function getExistingGameData() {
     // Check if localStorage values
     playerData.id = localStorage.getItem('id');
 
-    // Check if no local storage ID, check query params for roomKey
-    if(!playerData.id) {
-        urlParams = new URLSearchParams(window.location.search);
-        playerData.roomKey = urlParams.get('r');
-    }
+    // Check query params for roomKey, if localStorage is expired this might be relevant
+    urlParams = new URLSearchParams(window.location.search);
+    playerData.roomKey = urlParams.get('r');
 }
 
 function directVisitor() {
@@ -65,21 +63,13 @@ function directVisitor() {
 
     } else if(playerData.roomKey) {
         // No local storage but roomKey in query params so new player but room may be started, finished, or waiting.
-        // New player always has to go through the waiting room though
+        // New player always has to go through the waiting room though so they can enter a nickname
         roomData.status = urlParams.get('s');
 
-        switch (roomData.status) {
-            case 'waiting':
-                console.log('waiting status');
-                codrink19.home.allowJoinGame();
-                break;
-            case 'started':
-                console.log('started status');
-                // codrink19.game.init();
-                break;
-            default:
-                codrink19.home.gameNotFound();
-                break;
+        if(roomData.status === 'gameover') {
+            codrink19.home.gameNotFound();    
+        } else {
+            codrink19.home.allowJoinGame();   
         }
         
     } else {
