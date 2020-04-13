@@ -24,7 +24,7 @@ let playersList = [
 let roomsList = [
     {
         lock: 'abc',
-        started: true,
+        status: 'waiting',
         timeout: {}
     }
 ];
@@ -45,11 +45,22 @@ app.get('/', function(req, res){
 });
 
 app.get('/join', function(req, res){
+    // The query params
     let reqRoom = req.query.r;
     let reqCreator = req.query.n;
 
+    // The supposed room object.
+    let roomObject = roomsList.filter(room => room['lock'] === reqRoom)[0];
+
+    // Send index.html no matter what
     res.sendFile(__dirname + '/index.html');
-    res.redirect('/?r=' + reqRoom + '&n=' + reqCreator);
+
+    // Redirect depending on whether room actually exists and attach status param
+    if(roomObject) {
+        res.redirect('/?r=' + reqRoom + '&n=' + reqCreator + '&s=' + roomObject.status);
+    } else {
+        res.redirect('/?r=' + reqRoom + '&n=' + reqCreator + '&s=gameover');
+    }
 });
 
 app.get('*', function(req, res){

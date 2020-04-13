@@ -1,4 +1,12 @@
 .view.home {
+    .announcements {
+        display: none;
+        font-size: 2.75rem;
+        background: yellow;
+        padding: .5em;
+        margin-bottom: 0;
+    }
+
     .header-wrap {
         padding: 0 18px;
     
@@ -19,7 +27,7 @@
         }
     }
 
-    .button-start {
+    button {
         display: none;
         margin: 24px auto 0;
     }

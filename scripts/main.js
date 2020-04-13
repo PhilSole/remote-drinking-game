@@ -21,13 +21,10 @@ let roomData = {};
 // Kickoff when the document is ready
 $(document).ready(function() {
     // Save global DOM references
-    initDOMReferences();
+    initGlobalDOMVars();
 
     // Check for existing game data in URL or localStorage
-    getGameData();
-
-    // If there is game data, modify home
-    codrink19.home.init();
+    getExistingGameData();
 
     // Initialise socket.io-client
     socket = io();
@@ -35,11 +32,14 @@ $(document).ready(function() {
     // Only direct when the socket connects
     socket.on('connect', (e) => {
         directVisitor();
-    });    
+    });
+
+    // Initialise the home module
+    codrink19.home.init(); 
     
 });
 
-function initDOMReferences() {
+function initGlobalDOMVars() {
     $body = $('body');
     $viewHome = $body.find('.view.home');
     $viewWaiting = $body.find('.view.waiting-room');
@@ -47,7 +47,7 @@ function initDOMReferences() {
     $viewLoading = $body.find('.view.loading');
 }
 
-function getGameData() {
+function getExistingGameData() {
     // Check if localStorage values
     playerData.id = localStorage.getItem('id');
 
@@ -59,12 +59,29 @@ function getGameData() {
 }
 
 function directVisitor() {
-    console.log('erm');
     // Direct based on data presence
     if(playerData.id) {
-        // codrink19.connection.reconnection();    
+        // codrink19.connection.reconnection();  
+
     } else if(playerData.roomKey) {
-        // No local storage but roomKey in query params
+        // No local storage but roomKey in query params so new player but room may be started, finished, or waiting.
+        // New player always has to go through the waiting room though
+        roomData.status = urlParams.get('s');
+
+        switch (roomData.status) {
+            case 'waiting':
+                console.log('waiting status');
+                codrink19.home.allowJoinGame();
+                break;
+            case 'started':
+                console.log('started status');
+                // codrink19.game.init();
+                break;
+            default:
+                codrink19.home.gameNotFound();
+                break;
+        }
+        
     } else {
         // No local storage or roomKey
         codrink19.home.allowNewGame();

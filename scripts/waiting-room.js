@@ -9,8 +9,7 @@ codrink19.waitingRoom = function() {
     let $waitingWrap, $waitingList, $shareWrap, $shareLink, $roomCount, $btnBegin;
     
     let init = function(roomID = false) {
-        console.log('init waiting room');
-        
+        // Set DOM references        
         $formWrap = $body.find('.nickname-form-wrap');
         $form = $formWrap.find('.formPlayer');
         $playerName = $form.find('#playerName');
@@ -21,8 +20,7 @@ codrink19.waitingRoom = function() {
         $roomCount = $waitingWrap.find('.room-count');
         $btnBegin = $waitingWrap.find('.begin');
 
-        
-
+         
         // Either joining an existing room or creating a new one
         if(roomID) {
             socket.emit('see waiting room', roomID, function(otherplayers) {
