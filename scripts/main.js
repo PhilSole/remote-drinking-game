@@ -64,9 +64,8 @@ function directVisitor() {
     } else if(playerData.roomKey) {
         // No local storage but roomKey in query params so new player but room may be started, finished, or waiting.
         // New player always has to go through the waiting room though so they can enter a nickname
-        roomData.status = urlParams.get('s');
 
-        if(roomData.status === 'gameover') {
+        if(playerData.roomKey === 'gameover') {
             codrink19.home.gameNotFound();    
         } else {
             codrink19.home.allowJoinGame();   

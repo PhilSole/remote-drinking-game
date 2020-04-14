@@ -1,72 +1,74 @@
 .view.waiting-room {
     .header-wrap {
         padding: 0 18px;
-    }
-}
 
-.nickname-form-wrap, .waiting-list-wrap {
-    .inner {
-        width: 640px;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 0 18px;
+        .sub {
+            margin-bottom: 2em;
+        }
     }
 
-    form {
-        display: flex;
-        flex-wrap: wrap;
+    .nickname-form-wrap, .share-start-wrap, .waiting-list-wrap {
+        .inner {
+            width: 640px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 18px;
+        }
+    
+        @media screen and (max-width: 639px) {
+            button {
+                margin: 24px 0 0;
+                width: 100%;
+            }        
+        }
     }
-
-    button {
-        margin-left: 24px;
-    }
-
-    h2 {
-        margin: 1em 0;
-    }
-
-    @media screen and (max-width: 639px) {
+    
+    .nickname-form-wrap {
+        form {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    
+        input {
+            width: 60%;
+        }
+    
         button {
-            margin: 24px 0 0;
-            width: 100%;
-        }        
-    }
-}
-
-.nickname-form-wrap {
-    &.hide {
-        display: none;
-    }
-
-    .form-feedback {
-        margin-top: 24px;
-    }
-}
-
-.waiting-list-wrap {
-    display: none;
-
-    &.show {
-        display: block;
-    }
-
-    .begin {
-        display: none;
-        margin: 24px auto;
-
-        &.show {
-            display: block;
+            width: 35%;
+            margin-left: 5%;
+        }
+    
+        .form-feedback {
+            margin-top: 24px;
         }
     }
-
-    .share-wrap {
-        &.hide {
+    
+    .share-start-wrap {
+        .begin {
             display: none;
+            margin: 24px auto;
         }
+    
+        .share-link {
+            display: none;
+            width: 100%;
+            border: none;
+            padding: 12px 18px;
+            background: #efefef;
+        }    
     }
-
-    .share-link {
-        width: 100%;
-        border: none;
-    }
+    
+    .waiting-list-wrap {
+        display: none;
+    
+        h2 {
+            margin: 2em 0 1em;
+            text-align: left;
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    }    
 }

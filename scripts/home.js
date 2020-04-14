@@ -23,7 +23,6 @@ codrink19.home = function() {
     function updateSplash() {
         if(playerData.id) {
             $connectHeading.text('Reconnecting');
-            $announcement.text('Rejoining the game').addClass('show-block');
         } else if(playerData.roomKey) {
             roomData.creator = urlParams.get('n');
             if(roomData.creator) {
@@ -35,8 +34,11 @@ codrink19.home = function() {
     }
 
     // Show the new game button when client can connect
-    let allowNewGame = function() {
-        $connectMessage.addClass('hide-me');
+    let allowNewGame = function(showMessage) {
+        if(!showMessage) {
+            $connectMessage.addClass('hide-me');
+        }
+        
         $buttonStart.addClass('show-block');
 
         $buttonStart.on('click', function() {
@@ -56,7 +58,11 @@ codrink19.home = function() {
 
     let gameNotFound = function() {
         $connectHeading.text('Game not found!');
-        $announcement.text(roomData.creator + "'s game has finished");
+        if(roomData.creator) {
+            $announcement.text(roomData.creator + "'s game has finished");
+        } else {
+            $announcement.text("Whoops");  
+        }
         $ellipses.addClass('hide-me');
         allowNewGame(true);
     }
