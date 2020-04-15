@@ -11,6 +11,9 @@ let codrink19 = {};
 let $body;
 let $viewHome, $viewWaiting, $viewGame, $viewLoading;
 
+// Global layout vars
+let windowHeight, windowWidth;
+
 // Global objects
 let socket;
 let urlParams;
@@ -21,7 +24,10 @@ let roomData = {};
 // Kickoff when the document is ready
 $(document).ready(function() {
     // Save global DOM references
-    initGlobalDOMVars();
+    setGlobalDOMVars();
+
+    // window width and height for layout with JS
+    setGlobalLayoutVars();
 
     // Check for existing game data in URL or localStorage
     getExistingGameData();
@@ -35,16 +41,24 @@ $(document).ready(function() {
     });
 
     // Initialise the home module
-    codrink19.home.init(); 
+    codrink19.home.init();
+
+    // Set global event listeners
+    $(window).on('resize', $.debounce( 50, handleResize));
     
 });
 
-function initGlobalDOMVars() {
+function setGlobalDOMVars() {
     $body = $('body');
     $viewHome = $body.find('.view.home');
     $viewWaiting = $body.find('.view.waiting-room');
     $viewGame = $body.find('.view.game');
     $viewLoading = $body.find('.view.loading');
+}
+
+function setGlobalLayoutVars() {
+    windowHeight = window.innerHeight;
+    windowWidth = window.innerWidth;
 }
 
 function getExistingGameData() {
@@ -75,4 +89,8 @@ function directVisitor() {
         // No local storage or roomKey
         codrink19.home.allowNewGame();
     }
+}
+
+function handleResize() {
+    setGlobalLayoutVars();
 }

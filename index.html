@@ -68,7 +68,10 @@
                 </div>
                 <div class="share-start-wrap">
                     <div class="inner">
-                        <div class="share-link"></div>
+                        <div class="share-link-wrap">
+                            <input id="shareLink"></input>
+                            <button class="link-copy">Copy</button>
+                        </div>
                         <button class="begin">Start the game</button>
                     </div>
                 </div>
@@ -82,18 +85,19 @@
 
             <div class="view game">
                 <div class="up-next-wrap">Up next: <span class="next-player-name"></span></div>
-                <div class="your-turn-message">
-                    <h2>It's your turn!</h2>
-                    <p>Tap the screen to select your mini-game</p>
+                <div class="main-message-wrap">
+                    <h1 class="main"></h1>
+                    <h2 class="sub"></h2>
                 </div>
-                <div class="waiting-for-message">
-                    <h2>Waiting for: <span class="current-player-name"></span></h2>    
-                </div>
-                <div class="container-subgame unclicked">
+                <div class="minigame-wrap">
                     <h2 class="name"></h2>
                     <div class="description">
                         <p></p>
                     </div>
+                </div>
+                <div class="info-button-wrap">
+                    <p class="info"></p>
+                    <button class="btn-restart">Restart?</button>
                 </div>
             </div>
 

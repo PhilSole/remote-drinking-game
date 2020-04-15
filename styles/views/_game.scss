@@ -5,24 +5,7 @@
         top: 12px;
     }
 
-    .your-turn-message {
-        display: none;
-        text-align: center;
-        margin-top: 60px;
-
-        &.show {
-            display: block;
-        }
-    }
-
-    .waiting-for-message {
-        display: none;
-        text-align: center;
-        margin-top: 60px;
-
-        &.show {
-            display: block;
-        }
+    .main-message-wrap {
     }
 
     .container-subgame {
@@ -34,4 +17,10 @@
             }
         }
     }
+
+    .info-button-wrap {
+        display: none;
+        text-align: center;
+        margin-top: 60px;
+    }    
 }

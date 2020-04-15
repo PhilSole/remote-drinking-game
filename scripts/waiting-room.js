@@ -7,7 +7,7 @@ codrink19.waitingRoom = function() {
 
     let $headerWrap, $main, $sub;
     let $formWrap, $form, $playerName;
-    let $shareStartWrap, $shareLink, $btnBegin;
+    let $shareStartWrap, $shareLinkWrap, $shareLink, $btnBegin;
     let $waitingWrap, $waitingList, $roomCount;
     
     let init = function(roomKey) {
@@ -23,7 +23,9 @@ codrink19.waitingRoom = function() {
         $playerName = $form.find('#playerName');
 
         $shareStartWrap = $viewWaiting.find('.share-start-wrap');
-        $shareLink = $shareStartWrap.find('.share-link');
+        $shareLinkWrap = $shareStartWrap.find('.share-link-wrap');
+        $shareLink = $shareStartWrap.find('#shareLink');
+        $btnCopy = $shareStartWrap.find('.link-copy');
         $btnBegin = $shareStartWrap.find('.begin');
 
         $waitingWrap = $viewWaiting.find('.waiting-list-wrap');
@@ -70,7 +72,8 @@ codrink19.waitingRoom = function() {
                     // Update the view
                     $formWrap.addClass('hide-me');
                     $waitingList.append('<li>' + nickname + '</li>');
-                    $shareLink.text(gameURL).addClass('show-block');
+                    $shareLink.val(gameURL);
+                    $shareLinkWrap.addClass('show-block');
                     $waitingWrap.addClass('show-block');
                     $main.text("Thanks, " + nickname);
                     $sub.text('Share this link with your friends so they can join the game.');
@@ -81,6 +84,8 @@ codrink19.waitingRoom = function() {
                         // Set local storage values for player ID and name Existing game so room given
                         setPlayerData(socket.id, nickname, roomKey);
                         updateWaitingList(allPlayers);
+                        $main.text("Thanks, " + nickname);
+                        $sub.text('You can wait for more players or start the game.');
                     });
 
                     // Update the view
@@ -93,15 +98,23 @@ codrink19.waitingRoom = function() {
                 });
             }
         });
+
+        $btnCopy.on('click', function() {
+            var copyText = document.getElementById("shareLink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+        });
         
-        socket.on('new member', function(players) {
-            updateWaitingList(players);
+        socket.on('new member', function(allPlayers) {
+            let newPlayer = allPlayers[allPlayers.length - 1].nickname;
+            updateWaitingList(allPlayers);
+            $main.text(newPlayer + " joined!");
+            $sub.text('You can wait for more players or start the game.');
         });
 
         $btnBegin.on('click', function() {
-            socket.emit('start game request', playerData.room, function(allPlayers, roomobject, minigames) {
-                codrink19.game.init(allPlayers, roomobject, minigames);
-            });
+            socket.emit('start game request', playerData.roomKey);
         });
         
         socket.on('game start', function(allPlayers, roomobject, minigames) {

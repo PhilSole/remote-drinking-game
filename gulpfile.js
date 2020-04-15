@@ -24,7 +24,8 @@ const server = browserSync.create();
 // }
 
 function scripts() {
-    return src(['scripts/main.js',
+    return src(['scripts/lib/*.js',
+                'scripts/main.js',
                 'scripts/connection.js',
                 'scripts/home.js',
                 'scripts/waiting-room.js',

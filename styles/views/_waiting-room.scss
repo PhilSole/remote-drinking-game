@@ -48,12 +48,17 @@
             display: none;
             margin: 24px auto;
         }
-    
-        .share-link {
+
+        .share-link-wrap {
             display: none;
-            width: 100%;
+            margin-bottom: 3rem;
+        }
+    
+        #shareLink {
+            display: inline-block;
+            width: 70%;
             border: none;
-            padding: 12px 18px;
+            padding: 20px 24px;
             background: #efefef;
         }    
     }
