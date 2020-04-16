@@ -37,8 +37,9 @@ codrink19.waitingRoom = function() {
         if(roomKey) {
             socket.emit('see waiting room', roomKey, function(otherplayers) {
                 otherplayers.forEach(player => {
-                    $waitingList.append('<li>' + player['nickname'] + '</li>');    
+                    $waitingList.append('<li>' + player.nickname + '</li>');    
                 });
+                
                 $waitingWrap.addClass('show-block');
             });
 
@@ -110,7 +111,9 @@ codrink19.waitingRoom = function() {
             let newPlayer = allPlayers[allPlayers.length - 1].nickname;
             updateWaitingList(allPlayers);
             $main.text(newPlayer + " joined!");
-            $sub.text('You can wait for more players or start the game.');
+            if(allPlayers.length === 2) {
+                $sub.text('You can wait for more players or start the game.');
+            }
         });
 
         $btnBegin.on('click', function() {

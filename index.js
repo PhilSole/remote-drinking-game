@@ -23,7 +23,8 @@ let playersList = [
 let roomsList = [
     {
         lock: 'abc',
-        status: 'waiting'
+        status: 'waiting',
+        history: []
     }
 ];
 
@@ -183,6 +184,7 @@ io.on('connection', function(socket){
 
         let roomObject = roomsList.find(room => room.lock === roomKey);
         roomObject.history.push(minigameKey);
+        console.log(roomObject.history);
     });
 
 
@@ -194,6 +196,7 @@ io.on('connection', function(socket){
         let roomObject = roomsList.find(room => room.lock === roomKey);
 
         // Set the room turn to the next player's ID
+        // TODO: replace with findIndex()
         allPlayers.forEach((player, index) => {
             if(player.id == roomObject.turn) {
                 let nextIndex;
@@ -209,6 +212,6 @@ io.on('connection', function(socket){
         });
         
         // Emit to room the passed turn
-        socket.to(roomKey).emit('pass turn', allPlayers, roomObject);
+        io.to(roomKey).emit('pass turn', allPlayers, roomObject);
     });
 });

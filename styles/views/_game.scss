@@ -16,6 +16,7 @@
         }
 
         .description {
+            display: none;
             width: 640px;
             max-width: 100%;
             margin: auto;
@@ -23,9 +24,22 @@
     }
 
     .info-button-wrap {
-        display: none;
         text-align: center;
         margin-top: 60px;
+
+        .info {
+            display: none;
+            width: 640px;
+            max-width: 100%;
+            margin: auto;
+            background: yellow;
+            padding: 18px 24px;
+            font-size: 1.25rem;
+        }
+
+        button {
+            display: none;
+        }
     }  
     
     &.current-player {
