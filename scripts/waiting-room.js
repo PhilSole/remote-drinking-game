@@ -76,7 +76,7 @@ codrink19.waitingRoom = function() {
                     $shareLink.val(gameURL);
                     $shareLinkWrap.addClass('show-block');
                     $waitingWrap.addClass('show-block');
-                    $main.text("Thanks, " + nickname);
+                    $main.text("You're set, " + nickname);
                     $sub.text('Share this link with your friends so they can join the game.');
                 } else {                        
 
@@ -85,7 +85,7 @@ codrink19.waitingRoom = function() {
                         // Set local storage values for player ID and name Existing game so room given
                         setPlayerData(socket.id, nickname, roomKey);
                         updateWaitingList(allPlayers);
-                        $main.text("Thanks, " + nickname);
+                        $main.text("You're in, " + nickname);
                         $sub.text('You can wait for more players or start the game.');
                     });
 

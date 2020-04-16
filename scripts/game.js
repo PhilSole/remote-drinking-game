@@ -55,6 +55,7 @@ codrink19.game = function() {
         // The extra info and restart button
         $infoButtonWrap = $viewGame.find('.info-button-wrap');
         $info = $infoButtonWrap.find('.info');
+        $btnPassTurn = $infoButtonWrap.find('.btn-pass-turn');
         $btnRestart = $infoButtonWrap.find('.btn-restart');
     }
 
@@ -86,6 +87,14 @@ codrink19.game = function() {
     }
 
     function runTheTurn() {
+        // Use the roomObject param's history to set the available minigames and historical minigames
+        setMinigames();
+
+        // Start the ticker loop that repeatedly updates the minigame title
+        tickerGoing = true;
+        runTicker();
+
+        // Decide this client's role in the turn
         if(currentPlayer.id == playerData.id) {
             thisPlayersTurn();
         } else {
@@ -96,17 +105,10 @@ codrink19.game = function() {
     function thisPlayersTurn() {
         // Update the main text for the current player
         $main.text('Your turn, ' + playerData.nickname);
-        $sub.text('Tap anywhere to pick your mini-game');
-
-        // Use the roomObject param's history to set the available minigames and historical minigames
-        setMinigames();
-
-        // Start the ticker loop that repeatedly updates the minigame title
-        tickerGoing = true;
-        runTicker();
+        $sub.text('Tap anywhere to pick your mini-game').removeClass('hide-me');;
 
         // Add a class to the view making it interactive for the current player
-        $viewGame.addClass('current-player');
+        // $viewGame.addClass('current-player');
 
         // Add a listener to the screen for this player's click to pick a minigame
         $viewGame.one('click', () => {
@@ -117,13 +119,13 @@ codrink19.game = function() {
             socket.emit('player pick', newMinigame.key, playerData.roomKey);
 
             setTimeout(() => {
-                $info.text("Once you're finished with your turn click anywhere to pass to the next player.").addClass('show-block');
+                $btnPassTurn.addClass('show-inline-block');
 
-                $viewGame.one('click', () => {
+                $btnPassTurn.one('click', () => {
                     console.log('clicked to pass turn');
                     socket.emit('pass turn', playerData.roomKey);    
                 });
-            }, 10000);
+            }, 3000);
         });
     }
 
@@ -131,11 +133,6 @@ codrink19.game = function() {
         // Update the main text as a spectating player
         $main.text(currentPlayer.nickname + "'s turn");
         $sub.text('Waiting for ' + currentPlayer.nickname + ' to pick a mini-game.');
-
-        setMinigames();
-
-        tickerGoing = true;
-        runTicker();
     } 
 
 
@@ -195,8 +192,9 @@ codrink19.game = function() {
             setCurrentPlayer();
             runTheTurn();
 
-            $info.removeClass('show-block');
+            $btnPassTurn.removeClass('show-inline-block');
             $minigameDescription.removeClass('show-block');
+            $mainMessageWrap.removeClass('hide-me');
         });
     }
 

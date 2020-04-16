@@ -204,7 +204,7 @@ io.on('connection', function(socket){
                 if(index == allPlayers.length - 1) {
                     nextIndex = 0;
                 } else {
-                    nextIndex = currentindex + 1;
+                    nextIndex = index + 1;
                 }
 
                 roomObject.turn = allPlayers[nextIndex].id;
