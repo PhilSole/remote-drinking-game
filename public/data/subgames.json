@@ -231,17 +231,6 @@
 },
 {
     "objectType": "subgame",
-    "name": "Multi-lingual",
-    "key": "f68792b0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Any player who can speak more than one language fluently has a drink for each language.  Call out the language before each drink.",
-        "content": false,
-        "category": "Profile"
-    }
-},
-{
-    "objectType": "subgame",
     "name": "Thumb Master",
     "key": "f687b9c0_397f_11e8_a45b_25718a0c5009",
     "details": {
@@ -381,17 +370,6 @@
         "description": "Drink the rest of your vessel. Owww it hurts I know.",
         "content": false,
         "category": "Solo"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Speak in a foreign Accent",
-    "key": "f68a2ac1_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "contentBasic",
-        "description": "Speak in the following accent for the rest of the game! Drink each time you forget.",
-        "content": "accents",
-        "category": "Rule"
     }
 },
 {
@@ -856,17 +834,6 @@
     "details": {
         "subgameType": "standard",
         "description": "Every player choose a musical instrument with an action and sound.  The game starts with all players slapping their thighs and clapping their hands in a constant, repeated rhythm of slap-slap-clap-clap.  Start slow.  You start and pass the turn around the group by substituting the claps, first for your instrument, and then for another player's.  e.g. slap-slap-guitar-guitar-slap-slap-drums-drums.  The player who receives the turn (the drummer in this example) must IMMEDIATELY continue the rhythm with slap-slap-drums-drums-slap-slap-violin-violin  (or another players instrument) and play continues until someone stuffs up!  When you stuff up you drink and are out!  Other players continue until there are only two left who get to nominate 3 drinks each.  They should probably also start a band.",
-        "content": false,
-        "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Sex positions",
-    "key": "f6926820_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Every player chooses their unique sexual position with it's action and name.  The game starts with all players slapping their thighs and clapping their hands in a constant, repeated rhythm of slap-slap-clap-clap.  Start slow.  You start and pass the turn around the group by substituting the claps, first for your sexual position and then for another player's.  e.g. slap-slap-missionary-slap-slap-doggy style.  The player who receives the turn (the doggy styler in this example) must IMMEDIATELY continue the rhythm with slap-slap-doggy style-slap-slap-blow job  (or another players sexual position) and play continues until someone stuffs up!  When you stuff up you drink and are out!  Other players continue until there are only two left who get to nominate 3 drinks each.  They should maybe get a room too.",
         "content": false,
         "category": "Everybody"
     }

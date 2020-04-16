@@ -16,16 +16,14 @@ let playersList = [
     {
         id: '123',
         nickname: 'Bob',
-        roomKey: 'abc',
-        timeout: {}
+        roomKey: 'abc'
     }
 ];
 
 let roomsList = [
     {
         lock: 'abc',
-        status: 'waiting',
-        timeout: {}
+        status: 'waiting'
     }
 ];
 
@@ -132,7 +130,7 @@ io.on('connection', function(socket){
     // ---------------------------------------------------------------------------------------
     socket.on('new game request', function(nickname, lock, acknowledge){
         playersList.push({id:socket.id, nickname:nickname, roomKey:lock});
-        roomsList.push({lock:lock, status:'waiting'});
+        roomsList.push({lock:lock, status:'waiting', history: []});
 
         socket.join(lock);
         acknowledge();
@@ -164,7 +162,7 @@ io.on('connection', function(socket){
     // A player has clicked the start button
     // ---------------------------------------------------------------------------------------
     socket.on('start game request', function(roomKey){
-        let roomObject = roomsList.filter(room => room['lock'] === roomKey)[0];
+        let roomObject = roomsList.find(room => room.lock === roomKey);
 
         if(roomObject.status != 'started' ) {
             roomObject.status = 'started';
@@ -177,7 +175,40 @@ io.on('connection', function(socket){
     });
 
 
+    // ---------------------------------------------------------------------------------------
+    // A player picked their minigame
+    // ---------------------------------------------------------------------------------------
+    socket.on('player pick', function(minigameKey, roomKey){
+        socket.to(roomKey).emit('player pick', minigameKey);
+
+        let roomObject = roomsList.find(room => room.lock === roomKey);
+        roomObject.history.push(minigameKey);
+    });
 
 
+    // ---------------------------------------------------------------------------------------
+    // A player passed the turn
+    // ---------------------------------------------------------------------------------------
+    socket.on('pass turn', function(roomKey){
+        let allPlayers = playersList.filter(player => player.roomKey === roomKey);
+        let roomObject = roomsList.find(room => room.lock === roomKey);
 
+        // Set the room turn to the next player's ID
+        allPlayers.forEach((player, index) => {
+            if(player.id == roomObject.turn) {
+                let nextIndex;
+
+                if(index == allPlayers.length - 1) {
+                    nextIndex = 0;
+                } else {
+                    nextIndex = currentindex + 1;
+                }
+
+                roomObject.turn = allPlayers[nextIndex].id;
+            }
+        });
+        
+        // Emit to room the passed turn
+        socket.to(roomKey).emit('pass turn', allPlayers, roomObject);
+    });
 });
