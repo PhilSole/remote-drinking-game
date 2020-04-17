@@ -1,18 +1,14 @@
 .view.game {
-    .up-next-wrap {
-        position: fixed;
-        right: 18px;
-        top: 12px;
-        font-weight: 700;
-        font-size: 1.25rem;
-    }
-
     .main-message-wrap {
+        .main {
+            font-size: 2.75rem;
+            padding: .4em .5em .5em;
+        }
     }
 
     .minigame-wrap {
         .title {
-            font-size: 5rem;
+            font-size: 4rem;
         }
 
         .description {
@@ -40,11 +36,48 @@
         button {
             display: none;
         }
-    }  
+    }
+
+    .player-list-wrap {
+        position: fixed;
+        bottom: 18px;
+        left: 18px;
+
+        .heading {
+            font-weight: 700;
+        }
+    }
     
-    // &.current-player {
-    //     .minigame-wrap {
-    //         cursor: pointer;
-    //     }
-    // }
+    .player-list {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: inline-block;
+            padding: 6px;
+
+            &:after {
+                content: ',';
+            }
+
+            &:last-child {
+                &:after {
+                    content: '';
+                }
+            }
+
+            &.active {
+                background: yellow;
+            }
+        }
+    }    
+    
+    &.current-player {
+        .main-message-wrap {
+            .main {
+                background: yellow;
+            }
+        }
+    }
 }

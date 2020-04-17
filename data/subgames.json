@@ -4,20 +4,9 @@
     "key": "f67e9200_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Swap names with the player who's turn it is next for the rest of the game.  Whenever ANYBODY calls either of you by your former name they drink!",
+        "description": "Swap names with the player who's turn it is next for the rest of the game.  Whenever ANYBODY calls either of you by your former name they take one sip.",
         "content": false,
         "category": "Rule"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Round the sun",
-    "key": "bb98c83d_ba0d_464d_8694_a453df0f927e",
-    "details": {
-        "subgameType": "standard",
-        "description": "The player who's birthday is the closest to today drink 3!",
-        "content": false,
-        "category": "Profile"
     }
 },
 {
@@ -26,20 +15,9 @@
     "key": "f6815120_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "All players have a drink!",
+        "description": "All players take one sip.",
         "content": false,
         "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Bartender",
-    "key": "f6819f40_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Get all players' drinks until your next turn (they pay for them!).  They can only request your service when they've finished their previous drink.",
-        "content": false,
-        "category": "Rule"
     }
 },
 {
@@ -48,7 +26,7 @@
     "key": "c214144e_a54f_4dd8_86dc_5d287aaed772",
     "details": {
         "subgameType": "standard",
-        "description": "Don't show your teeth for the rest of the game!  Drink each time you show those pearly whites.",
+        "description": "Don't show your teeth until your next turn! Take a sip each time you show those pearly whites.",
         "content": false,
         "category": "Rule"
     }
@@ -59,7 +37,7 @@
     "key": "f681ed60_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "players with clearly less than quarter of a drink, finish it off!",
+        "description": "Down the rest of your drink and nominate three sips, or take three sips.",
         "content": false,
         "category": "Profile"
     }
@@ -81,18 +59,7 @@
     "key": "f682d7c0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "No calling players by their first name FOR THE REST OF THE GAME. Last names only or drink.",
-        "content": false,
-        "category": "Rule"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "It's Rude to Point",
-    "key": "f6837400_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "No pointing for the rest of the game! Get caught and drink!  Elbow pointing is ok.",
+        "description": "No calling players by their first name FOR THE REST OF THE GAME. Last names only or take one sip.",
         "content": false,
         "category": "Rule"
     }
@@ -103,42 +70,9 @@
     "key": "f683e930_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "A tiny invisible man started living on the rim of your vessel.  Help him off before your COMPULSORY drinks, and help him back on afterwards.  Drink every time you forget!",
+        "description": "A tiny invisible man started living on the rim of your vessel.  Help him off before your COMPULSORY sips, and help him back on afterwards.  Take one sip every time you forget!",
         "content": false,
         "category": "Rule"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Seat Swap",
-    "key": "f6841040_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Everybody drink and move one seat over in the current direction of play.",
-        "content": false,
-        "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Tattooed",
-    "key": "f6845e60_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Anyone with a tattoo drink and show one tattoo to the group.",
-        "content": false,
-        "category": "Profile"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Star Signs",
-    "key": "f6848570_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "contentBasic",
-        "description": "The stars are aligned funny... Drink if you're a...",
-        "content": "starSigns",
-        "category": "Profile"
     }
 },
 {
@@ -147,7 +81,7 @@
     "key": "f684faa0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You must move in slow motion until your next turn.  Get caught forgetting and drink!",
+        "description": "You must move in slow motion until your next turn.  Get caught forgetting and take one sip!",
         "content": false,
         "category": "Rule"
     }
@@ -158,7 +92,7 @@
     "key": "f68596e0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "contentJoke",
-        "description": "Guys have a drink.",
+        "description": "Guys take one sip.",
         "content": "guyJokes",
         "category": "Profile"
     }
@@ -169,19 +103,8 @@
     "key": "f685bdf0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "contentJoke",
-        "description": "Girls take a drink.",
+        "description": "Girls take one sip.",
         "content": "girlJokes",
-        "category": "Profile"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Students",
-    "key": "f6865a30_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "All Students enrolled with an education provider of any kind drink",
-        "content": false,
         "category": "Profile"
     }
 },
@@ -191,20 +114,9 @@
     "key": "f686a850_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Drink 1, 2, or 3 drinks.  All players must match you!",
+        "description": "Take 1, 2, or 3 sips.  All players must match you!",
         "content": false,
         "category": "Power"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Rewind",
-    "key": "f686f670_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Play now goes in the opposite direction.",
-        "content": false,
-        "category": "Rule"
     }
 },
 {
@@ -213,7 +125,7 @@
     "key": "f6874490_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Keep your eyes closed until your next turn. Only open them for games that require vision, else drink each time you're caught.",
+        "description": "Keep your eyes closed until your next turn. Only open them for games that require vision, else take one sip each time you're caught.",
         "content": false,
         "category": "Rule"
     }
@@ -224,42 +136,20 @@
     "key": "f6876ba0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Repeat the last word of every sentence you say for the rest of the game!  Forget, and drink.",
+        "description": "Repeat the last word of every sentence you say for the rest of the game! Forget, and take one sip.",
         "content": false,
         "category": "Rule"
     }
 },
 {
     "objectType": "subgame",
-    "name": "Thumb Master",
+    "name": "Webcam Master",
     "key": "f687b9c0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You're the thumb master.  Place your thumb on the table top (or somewhere else agreed upon) any time BETWEEN TURNS and MAXIMUM ONCE PER TURN.  The last person to also place their thumb drinks.",
+        "description": "You're the webcam master until your next turn. Cover your webcam any time BETWEEN TURNS and MAXIMUM ONCE PER TURN. The last person to cover theirs takes one sip",
         "content": false,
         "category": "Power"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Name that track",
-    "key": "f687e0d0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "If there is a song playing, name the song or artist.  If you get it nominate, otherwise take one drink.  If there is no music, everybody drinks!",
-        "content": false,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Over the top",
-    "key": "f68807e0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Who's got the buffest guns out of you and the player opposite?  Arm wrestle to find out.  Loser drinks and winner nominates 3.",
-        "content": false,
-        "category": "Battle"
     }
 },
 {
@@ -268,7 +158,7 @@
     "key": "f6885600_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You now have little T-rex arms for the rest of the game! Your elbows are not allowed to leave your torso.  If you forget or they come off, drink!",
+        "description": "You now have little T-rex arms until your next turn! Your elbows are not allowed to leave your torso.  If you forget or they come off, take one sip!",
         "content": false,
         "category": "Rule"
     }
@@ -279,7 +169,7 @@
     "key": "f688a420_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Every time you or the player opposite has to drink, the buddy has to as well for the rest of the game!",
+        "description": "Every time you or the next player has to take a sip, the buddy has to as well until your next turn.",
         "content": false,
         "category": "Rule"
     }
@@ -290,7 +180,7 @@
     "key": "f688cb30_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Applaud every time someone has to drink for the rest of the game!  Forget to applaud and drink.",
+        "description": "Applaud every time someone has to drink until your next turn! Forget to applaud and take one sip.",
         "content": false,
         "category": "Rule"
     }
@@ -301,42 +191,9 @@
     "key": "f6894060_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Whoever has the tightest pants or jeans drinks.",
+        "description": "Whoever has the tightest pants or jeans takes one sip.",
         "content": false,
         "category": "Profile"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Spin the bottle",
-    "key": "f6894061_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "canvas",
-        "description": "Put the phone in the middle of all players.  Press go and spin the bottle!  Whoever it lands on has to drink 3.",
-        "content": "spin-the-bottle",
-        "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Fastest Tapper",
-    "key": "5cb87b07_160d_11e8_a7c5_d7bf8118b9c6",
-    "details": {
-        "subgameType": "canvas",
-        "description": "You and the player opposite tap as fast as you can to make your character run to their drink and drink the whole thing.  Loser drinks 3!",
-        "content": "tap-race",
-        "category": "Battle"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Buzzers",
-    "key": "d8f50c0b_3080_4190_be10_1367a86bf184",
-    "details": {
-        "subgameType": "canvas",
-        "description": "It's multiple choice quiz time for up to 10 players. Drink 1 for wrong answers. Answer correctly and exit the quiz.  Last player drinks 3!",
-        "content": "buzzers",
-        "category": "Everybody"
     }
 },
 {
@@ -345,7 +202,7 @@
     "key": "f689dca0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Challenge the player opposite you to a best of three.  Loser drinks 3!",
+        "description": "Challenge the next player to a best of three.  Loser takes three sips!",
         "content": false,
         "category": "Battle"
     }
@@ -356,7 +213,7 @@
     "key": "f689dca1_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You can only speak in three word sentences for the rest of the game!  Drink each time you forget!",
+        "description": "You can only speak in three word sentences until your next turn. Take one sip each time you forget.",
         "content": false,
         "category": "Rule"
     }
@@ -367,7 +224,7 @@
     "key": "f68a2ac0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Drink the rest of your vessel. Owww it hurts I know.",
+        "description": "Chug the rest of your vessel. Owww it hurts I know.",
         "content": false,
         "category": "Solo"
     }
@@ -378,18 +235,7 @@
     "key": "f68a78e0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You are the question master.  If you ask someone a question and they answer you, they have to drink.  They are allowed to respond only with \"@#$% off\" or by asking a question back.",
-        "content": false,
-        "category": "Power"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Snake Eyes",
-    "key": "f68a9ff0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Until your next turn, anyone who you catch looking directly in your eyes has to drink.",
+        "description": "You are the question master. If you ask someone a question and they answer you, they take one sip. They are allowed to respond only with \"@#$% off\" or by asking a question back.",
         "content": false,
         "category": "Power"
     }
@@ -400,7 +246,7 @@
     "key": "f68ac700_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You are the Rule Master.  Create a rule that everyone must follow including yourself.  Failure to follow the rule results in a drink for that player.",
+        "description": "You are the Rule Master. Create a rule that everyone must follow including yourself. Failure to follow the rule results in a sip for that player.",
         "content": false,
         "category": "Power"
     }
@@ -411,7 +257,7 @@
     "key": "f68b1520_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Never drink alone... except now... drink alone now.",
+        "description": "Never drink alone... except now... drink alone now. Take one sip.",
         "content": false,
         "category": "Solo"
     }
@@ -422,7 +268,7 @@
     "key": "f68b8a50_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "From now on all players must only drink with their left hand and their pinky finger must be removed from the vessel like a proper lady.  Failure to do so means drink.",
+        "description": "From now on all players must only drink with their left hand and their pinky finger must be removed from the vessel like a \"proper lady\". Failure to do so means take a sip.",
         "content": false,
         "category": "Rule"
     }
@@ -433,7 +279,7 @@
     "key": "f68bb160_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Don't speak until your next turn.  Any utterance, even an \"mmm\" results in a drink, so quiet!",
+        "description": "Don't speak until your next turn.  Any utterance, even an \"mmm\" results in a sip, so quiet!",
         "content": false,
         "category": "Rule"
     }
@@ -444,7 +290,7 @@
     "key": "f68bd870_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Have a couple of drinks just for yourself.",
+        "description": "Have a couple of sips just for yourself.",
         "content": false,
         "category": "Solo"
     }
@@ -455,7 +301,7 @@
     "key": "f68bff80_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Have a few drinkies just for you.",
+        "description": "Have a few sips just for you.",
         "content": false,
         "category": "Solo"
     }
@@ -466,7 +312,7 @@
     "key": "f68c2690_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Choose your victim for one drink nomination.",
+        "description": "Choose your victim for one sip nomination.",
         "content": false,
         "category": "Power"
     }
@@ -477,7 +323,7 @@
     "key": "f68c4da0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Choose one victim or spread your two drink nominations out.",
+        "description": "Choose one victim or spread your two sip nominations out.",
         "content": false,
         "category": "Power"
     }
@@ -488,18 +334,18 @@
     "key": "f68c74b0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Choose one victim or spread your three drink nominations out.",
+        "description": "Choose one victim or spread your three sip nominations out.",
         "content": false,
         "category": "Power"
     }
 },
 {
     "objectType": "subgame",
-    "name": "Speak with a lisp",
+    "name": "Thpeak with a lisp",
     "key": "f68c9bc0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Speak with a lisp for the rest of the game!  If you get caught breaking character... drink.",
+        "description": "Speak with a lisp until your next turn! If you get caught breaking character... take one thip.",
         "content": false,
         "category": "Rule"
     }
@@ -510,42 +356,9 @@
     "key": "f68cc2d0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Tell one truth and two lies in a random order.  Everyone locks in their guess for the truth.  Anyone who doesn't get it right drinks and you drink for everyone that does!",
+        "description": "Tell one truth and two lies in a random order. Everyone locks in their guess for the truth. Anyone who doesn't get it right takes a sip and you sip for everyone that does!",
         "content": false,
         "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Hermit",
-    "key": "f68ce9e0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Sit somewhere no-one has a direct line of sight on you for one round.  Come back for games that require you to be visible",
-        "content": false,
-        "category": "Rule"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Paper pong",
-    "key": "f68ce9e1_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "The player opposite puts down their vessel.  Screw up any piece of paper and have 3 shots without leaning or changing position.  They drink once for every hit.  You drink for each miss!",
-        "content": false,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Clicks",
-    "key": "f68d3800_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Everyone assigns themselves a one syllable nickname.  Start the game with everyone slowly in rhythm: 1.Knees, 2.Clap, 3.Right-hand-click, 4.Left-hand-click. Person who's turn it is: on beat 3 say a number from 1-4 and on beat 4 say a name. Whoever's name gets said: from the next beat 1, repeats their own name IN TIME WITH THE BEAT. The number the sender says governs the number of times the receiver repeats their name.  Receiver then becomes sender and says a number and name IN TIME WITH THE BEAT (on beat the 3 and 4) to pass on to the next person.",
-        "content": false,
-        "category": "Everybody"
     }
 },
 {
@@ -554,7 +367,7 @@
     "key": "f68d8620_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "timer",
-        "description": "Dance like a robot from the 80's for 30 seconds without breaking character or drink three.",
+        "description": "Dance like a robot from the 80's for 30 seconds without breaking character or take three sips.",
         "time": 30,
         "category": "Dare"
     }
@@ -565,7 +378,7 @@
     "key": "f68dad30_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Strip one item of clothing or drink one.  Shoes, socks, and jewellery don't count.",
+        "description": "Strip one item of clothing or take one sip.  Shoes, socks, and jewellery don't count.",
         "category": "Dare"
     }
 },
@@ -575,7 +388,7 @@
     "key": "f68dad31_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Strip two items of clothing or drink two.  Shoes, socks, and jewellery don't count.",
+        "description": "Strip two items of clothing or take two sips.  Shoes, socks, and jewellery don't count.",
         "category": "Dare"
     }
 },
@@ -585,7 +398,7 @@
     "key": "f68e2260_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Strip three items of clothing or drink three.  Shoes, socks, and jewellery don't count.",
+        "description": "Strip three items of clothing or take three sips.  Shoes, socks, and jewellery don't count.",
         "category": "Dare"
     }
 },
@@ -595,7 +408,7 @@
     "key": "f68e2261_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Put on some lipstick or drink two.",
+        "description": "Put on some lipstick or take three sips.",
         "content": false,
         "category": "Dare"
     }
@@ -606,7 +419,7 @@
     "key": "f68e7080_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Let someone draw a stylish pencil moustache on you, or drink two.",
+        "description": "Draw on a stylish pencil moustache, or take two sips.",
         "category": "Dare"
     }
 },
@@ -616,7 +429,7 @@
     "key": "f68e9790_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "timer",
-        "description": "Attempt Michael Jackson's \"moon walk\" and other classic Michael moves for 30 seconds without breaking character or drink 3.",
+        "description": "Attempt Michael Jackson's \"moon walk\" and other classic Michael moves for 30 seconds without breaking character or take three sips.",
         "time": 30,
         "category": "Dare"
     }
@@ -627,7 +440,7 @@
     "key": "f68ebea0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Straight back, chest to the floor.  From the knees if you choose.  5 good push-ups or drink one.",
+        "description": "Straight back, chest to the floor.  From the knees if you choose.  5 good push-ups or take one sip.",
         "content": false,
         "category": "Challenge"
     }
@@ -638,7 +451,7 @@
     "key": "f68ee5b0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Straight back, chest to the floor.  From the knees if you choose. 10 good push-ups or drink two.",
+        "description": "Straight back, chest to the floor.  From the knees if you choose. 10 good push-ups or take two sips.",
         "content": false,
         "category": "Challenge"
     }
@@ -649,126 +462,8 @@
     "key": "f68f0cc0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Straight back, chest to the floor. From the knees if you choose.  15 good push-ups or drink three.",
+        "description": "Straight back, chest to the floor. From the knees if you choose.  15 good push-ups or take three.",
         "content": false,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Hug Someone",
-    "key": "f68f33d0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "quickTimer",
-        "description": "Hug another player within 10 seconds or drink.",
-        "time": 10,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Frog Prince",
-    "key": "f68f5ae0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "quickTimer",
-        "description": "Convince another player to kiss your cheek in 10 seconds or drink.",
-        "time": 10,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Mr. Worldwide",
-    "key": "5dae50e0_ef13_46a0_af70_f52a41a22eb1",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Get players to guess the country by DANCE ONLY! No vocal sounds or other gestures.  The player who gets it nominates 2 drinks.  If noone gets it, everyone drinks and you drink 2!  You have 30 seconds.",
-        "content": "countries",
-        "time": 30,
-        "category": "Performer"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Impersonator",
-    "key": "f68fa900_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Other players must guess who you are by your IMPERSONATION ONLY.  If a player guesses right, you both get to nominate 2, otherwise everyone drinks!  You have 15 seconds.",
-        "content": "impersonations",
-        "time": 15,
-        "category": "Performer"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Hum a song",
-    "key": "f68ff720_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Don't show the phone to any other players.  Hum or whistle the song.  If another player guesses right they nominate 2, otherwise everyone drinks and you drink 2!  You have 45 seconds.",
-        "content": "famousSongs",
-        "time": 45,
-        "category": "Performer"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "G-N-I-L-L-E-P-S",
-    "key": "f6901e30_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Pass the phone to the next player. They will read out the word which you must spell backwards WITH NO MISTAKES or drink 2. You have 25 seconds.",
-        "content": "spellBackwards",
-        "time": 25,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Charades",
-    "key": "f6909360_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Don't show the phone to any other players.  You have 1 minute to act out the clue.  No talking or vocal sounds of any kind. The player who gets it nominates 2.  If noone gets it everybody drinks!",
-        "content": "charades",
-        "time": 60,
-        "category": "Performer"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Doodle",
-    "key": "f690ba70_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "canvas",
-        "description": "Don't show the phone to any other players.  You have 30 seconds to draw the following clue.  No talking!  The player who guesses right nominates 2.  If noone gets it everybody drinks!",
-        "content": "doodles",
-        "time": 30,
-        "category": "Performer"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Who am I?",
-    "key": "f690e180_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Don't look at the answer.  Hold the phone to your forehead and show everyone else.  Ask yes/no questions to find out who you are. You have 60 seconds or drink 3!",
-        "content": "famousPeople",
-        "time": 60,
-        "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Tongue Twister",
-    "key": "f6912fa0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "timedReveal",
-        "description": "Say the tongue twister perfectly... WITH YOUR EYES CLOSED. Once you reveal it, you'll have 30 seconds! Fail and drink 2!",
-        "content": "tongueTwisters",
-        "time": 30,
         "category": "Challenge"
     }
 },
@@ -778,7 +473,7 @@
     "key": "f6917dc0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "quickTimer",
-        "description": "Name seven alternative or slang words for penis in one minute or drink.",
+        "description": "Name seven alternative or slang words for penis in one minute or take two sips.",
         "time": 60,
         "category": "Challenge"
     }
@@ -789,7 +484,7 @@
     "key": "f691cbe0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "quickTimer",
-        "description": "Name seven alternative or slang words for vagina in one minute or drink.",
+        "description": "Name seven alternative or slang words for vagina in one minute or take two sips.",
         "time": 60,
         "category": "Challenge"
     }
@@ -800,20 +495,9 @@
     "key": "f691f2f0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "quickTimer",
-        "description": "Name seven alternative or slang words for breasts in one minute or drink.",
+        "description": "Name seven alternative or slang words for breasts in one minute or take two sips.",
         "time": 60,
         "category": "Challenge"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Waterfall",
-    "key": "f691f2f1_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "All players start drinking at the same time.  YOU can stop when you like.  The player to your left can stop after you do, and the player to their left can stop after they do etc etc.",
-        "content": false,
-        "category": "Everybody"
     }
 },
 {
@@ -822,18 +506,7 @@
     "key": "f6921a00_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Going clockwise from you, as a group, count upwards from 1.  However, noone can say a multiple of seven or any number with a seven in it!  Instead clap.  E.g 1, 2, 3, 4, 5, 6, clap, 8, 9...",
-        "content": false,
-        "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Musical Instruments",
-    "key": "f6924110_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Every player choose a musical instrument with an action and sound.  The game starts with all players slapping their thighs and clapping their hands in a constant, repeated rhythm of slap-slap-clap-clap.  Start slow.  You start and pass the turn around the group by substituting the claps, first for your instrument, and then for another player's.  e.g. slap-slap-guitar-guitar-slap-slap-drums-drums.  The player who receives the turn (the drummer in this example) must IMMEDIATELY continue the rhythm with slap-slap-drums-drums-slap-slap-violin-violin  (or another players instrument) and play continues until someone stuffs up!  When you stuff up you drink and are out!  Other players continue until there are only two left who get to nominate 3 drinks each.  They should probably also start a band.",
+        "description": "Going in order, count upwards from 1 as a group.  However, noone can say a multiple of seven or any number with a seven in it! Clap instead.  E.g 1, 2, 3, 4, 5, 6, clap, 8, 9... If you mess up, take two sips.",
         "content": false,
         "category": "Everybody"
     }
@@ -844,18 +517,7 @@
     "key": "f692b640_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Say any random object.  The next player must say your object and then add their own.  players must keep repeating the growing list in order and adding their own objects until someone can't remember the sequence. Loser drinks 3!",
-        "content": false,
-        "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Finger Cup",
-    "key": "f692b641_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Everybody place one finger on the rim of a single cup filled with half a drink in the centre of the group.  Starting with you, take turns to guess the number of fingers that will be left on the cup, where as you make your guess, everyone can either leave there finger on or immediately remove it.  If you guess wrong, take a drink then put your finger back.  Get it right and you're free while the other players carry on.  The last player drinks the cup.  Delayed finger removals count as being left on and that player drinks.",
+        "description": "Say any random object. The next player must say your object and then add their own. players must keep repeating the growing list in order and adding their own objects until someone can't remember the sequence. Loser takes three sips!",
         "content": false,
         "category": "Everybody"
     }
@@ -866,7 +528,7 @@
     "key": "f6932b70_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "You say: \"A ship came into the harbour carrying a cargo load of...\"  then name a category of things and a thing from that category e.g. types of fruit, banana.  Each player says a new thing from the category on their turn.  Hesitate for 5 seconds or say something that's already been said and they drink.",
+        "description": "You say: \"A ship came into the harbour carrying a cargo load of...\"  then name a category of things and a thing from that category e.g. types of fruit, banana.  Each player says a new thing from the category on their turn.  Hesitate for five seconds or say something that's already been said and they take two sips.",
         "content": false,
         "category": "Everybody"
     }
@@ -877,7 +539,7 @@
     "key": "f6935280_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Start a rhyme off (or just say a word if you're boring).  Each player then has to rhyme with that.  Repeat a word or can't think of one and drink 2.  Words that sound the same but have a different meaning are ok.",
+        "description": "Start a rhyme off (or just say a word if you're not much of a rapper).  Each player then has to rhyme with that.  Repeat a word or can't think of one and take two sips.  Words that sound the same but have a different meaning are ok.",
         "content": false,
         "category": "Everybody"
     }
@@ -888,7 +550,7 @@
     "key": "f6937990_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Think of something that you've never done but you think some other players have.  Everyone who's done it has to drink.",
+        "description": "Think of something that you've never done but you think some other players have. Everyone who's done it has to take a sip.",
         "content": false,
         "category": "Power"
     }
@@ -899,53 +561,9 @@
     "key": "f693c7b0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Play starts clockwise around the group.  Each player says \"Fuzzy Duck\" until someone says \"Duzzy\".  Then play reverses and players have to say \"Ducky Fuzz\".  Play can be reversed again at any time when someone says \"Duzzy\".  Stuff it up and drink.",
+        "description": "Play starts with you and continues around the group in order. Each player says \"Fuzzy Duck\" until someone says \"Duzzy\". Then play reverses and players have to say \"Ducky Fuzz\". Play can be reversed again at any time when someone says \"Duzzy\".  Stuff it up and and take two sips!",
         "content": false,
         "category": "Everybody"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Beer goggles",
-    "key": "f693eec0_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Make \"beer goggles\" out of your thumbs and index fingers. Pass play to the left or right by extending the appropriate hand and saying \"woop\".  You can pass it across the circle by extending both hands directly towards a player and going \"woop woop\". No hesitation allowed!  Fail and drink!",
-        "content": false,
-        "category": "Everybody"
-    }
-},      
-{  
-    "objectType":"subgame",
-    "name":"High Noon",
-    "key":"f6898e80_397f_11e8_a45b_25718a0c5009",
-    "details":{  
-      "subgameType":"canvas",
-      "description":"It's high noon... you and the player opposite find yourselves in a gun duel.  Wait for the clock to strike midday. Shoot too soon and drink before starting again.  Get shot and drink 3!",
-      "content":"high-noon",
-      "category":"Battle"
-    }
-},  
-{  
-    "objectType":"subgame",
-    "name":"Chicken",
-    "key":"4875ee99_4a2a_48d1_b074_408099efa0b1",
-    "details":{  
-      "subgameType":"canvas",
-      "description":"Two player battle between you and the player opposite. Race towards each other head-on to see who is chicken. 3 drinks to the chicken and 6 each if you crash!",
-      "content":"chicken",
-      "category":"Battle"
-    }
-},
-{
-    "objectType": "subgame",
-    "name": "Truth or Dare",
-    "key": "c18ad7c0_e27a_4dc2_8c80_661057c2054b",
-    "details": {
-        "subgameType": "truthOrDare",
-        "description": "Select Truth or Dare. If you can't answer or complete the dare then take the number of drinks specified!",
-        "content": "truthOrDare",
-        "category": "Dare"
     }
 }
 ]

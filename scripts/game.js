@@ -6,10 +6,10 @@
 
 codrink19.game = function() {
     // DOM references
-    let $nextPlayerName;
     let $mainMessageWrap, $main, $sub;
     let $minigameWrap, $minigameTitle, $minigameDescription;
     let $infoButtonWrap, $info, $btnRestart;
+    let $playerList;
 
     // Logic variables
     let allPlayers, roomObject, minigames;
@@ -26,7 +26,7 @@ codrink19.game = function() {
         setDOMVars();
 
         // Loop through the players data from the server and find the current player
-        setCurrentPlayer();
+        setPlayers();
 
         // Check if this client is the current player and carry out the appropriate turn function
         runTheTurn();
@@ -39,8 +39,6 @@ codrink19.game = function() {
     }
 
     function setDOMVars() {
-        // The next player in top right
-        $nextPlayerName = $viewGame.find('.next-player-name');
 
         // The main messages at the top middle
         $mainMessageWrap = $viewGame.find('.main-message-wrap');
@@ -57,15 +55,26 @@ codrink19.game = function() {
         $info = $infoButtonWrap.find('.info');
         $btnPassTurn = $infoButtonWrap.find('.btn-pass-turn');
         $btnRestart = $infoButtonWrap.find('.btn-restart');
+
+        // The player list
+        $playerListWrap = $viewGame.find('.player-list-wrap');
+        $playerList = $playerListWrap.find('.player-list');
     }
 
-    function setCurrentPlayer() {
+    function setPlayers() {
+        // Empty the player list
+        $playerList.html('');
+
         allPlayers.forEach((player, index) => {
             // Find who's turn it is
             if(player.id == roomObject.turn) {
                 // Set the local current player var
                 currentPlayer = player;
                 setNextPlayer(index);
+
+                $playerList.append('<li class="active">' + player.nickname + '</li>');
+            } else {
+                $playerList.append('<li>' + player.nickname + '</li>');    
             }
         });
     }
@@ -78,12 +87,6 @@ codrink19.game = function() {
         } else {
             nextIndex = currentindex + 1;
         }
-
-        if(allPlayers[nextIndex].id == playerData.id) {
-            $nextPlayerName.text('You!');    
-        } else {
-            $nextPlayerName.text(allPlayers[nextIndex].nickname);
-        } 
     }
 
     function runTheTurn() {
@@ -108,13 +111,14 @@ codrink19.game = function() {
         $sub.text('Tap anywhere to pick your mini-game').removeClass('hide-me');;
 
         // Add a class to the view making it interactive for the current player
-        // $viewGame.addClass('current-player');
+        $viewGame.addClass('current-player');
 
         // Add a listener to the screen for this player's click to pick a minigame
         $viewGame.one('click', () => {
             tickerGoing = false;
             $minigameDescription.text(newMinigame.details.description).addClass('show-block');
-            $mainMessageWrap.addClass('hide-me');
+            $main.text('You picked:');
+            $sub.addClass('hide-me');
 
             socket.emit('player pick', newMinigame.key, playerData.roomKey);
 
@@ -125,7 +129,7 @@ codrink19.game = function() {
                     console.log('clicked to pass turn');
                     socket.emit('pass turn', playerData.roomKey);    
                 });
-            }, 3000);
+            }, 4000);
         });
     }
 
@@ -133,6 +137,8 @@ codrink19.game = function() {
         // Update the main text as a spectating player
         $main.text(currentPlayer.nickname + "'s turn");
         $sub.text('Waiting for ' + currentPlayer.nickname + ' to pick a mini-game.');
+
+        $viewGame.removeClass('current-player');
     } 
 
 
@@ -185,11 +191,13 @@ codrink19.game = function() {
         });
 
         // when another player makes a pick
-        socket.on('pass turn', function(thePlayers, theRoom) {
+        socket.on('turn passed', function(thePlayers, theRoom) {
             allPlayers = thePlayers;
             roomObject = theRoom;
 
-            setCurrentPlayer();
+            console.log(roomObject);
+
+            setPlayers();
             runTheTurn();
 
             $btnPassTurn.removeClass('show-inline-block');

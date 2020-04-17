@@ -197,21 +197,17 @@ io.on('connection', function(socket){
 
         // Set the room turn to the next player's ID
         // TODO: replace with findIndex()
-        allPlayers.forEach((player, index) => {
-            if(player.id == roomObject.turn) {
-                let nextIndex;
 
-                if(index == allPlayers.length - 1) {
-                    nextIndex = 0;
-                } else {
-                    nextIndex = index + 1;
-                }
+        let currentIndex = allPlayers.findIndex(player => player.id === roomObject.turn);
+        let nextIndex = 0;
 
-                roomObject.turn = allPlayers[nextIndex].id;
-            }
-        });
+        if(currentIndex < allPlayers.length - 1) {
+            nextIndex = currentIndex + 1;
+        }
+
+        roomObject.turn = allPlayers[nextIndex].id;
         
         // Emit to room the passed turn
-        io.to(roomKey).emit('pass turn', allPlayers, roomObject);
+        io.to(roomKey).emit('turn passed', allPlayers, roomObject);
     });
 });
