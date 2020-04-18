@@ -565,5 +565,148 @@
         "content": false,
         "category": "Everybody"
     }
+},
+{
+    "objectType": "subgame",
+    "name": "I'm the invisible man",
+    "key": "0f9cd9dc_2636_4956_b2e0_e3670fb98261",
+    "details": {
+        "subgameType": "standard",
+        "description": "Every must ignore you for one round. Anyone who forgets and responds to you takes one sip.",
+        "content": false,
+        "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Drink away your sorrows",
+    "key": "eb75fd4f_6ef5_4e8f_a89a_48ac641fa9c9",
+    "details": {
+        "subgameType": "standard",
+        "description": "Anyone who's cried in the last month take one sip.",
+        "content": false,
+        "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Horizontal drinker",
+    "key": "514048d5_62bb_4f8a_ba2b_e208424853f3",
+    "details": {
+        "subgameType": "standard",
+        "description": "Take two sips while lying on your back.",
+        "content": false,
+        "category": "Solo"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Cold turkey",
+    "key": "eeeb8a2b_38aa_4ec9_991a_8e56e9dedfe1",
+    "details": {
+        "subgameType": "standard",
+        "description": "Don't drink until your next turn. If you get caught you must finish your whole drink!",
+        "content": false,
+        "category": "Solo"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Three little words",
+    "key": "5ee69ae4_e176_4ed1_a2ae_413936036d03",
+    "details": {
+        "subgameType": "standard",
+        "description": "Pick three words to describe the next player and then both take a sip.",
+        "content": false,
+        "category": "Solo"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Outsmarted",
+    "key": "c7c032ce_8f53_45d3_9a7c_b11163b52cc9",
+    "details": {
+        "subgameType": "standard",
+        "description": "Who is the smartest player? Everyone vote and the winner finishes their drink.",
+        "content": false,
+        "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Funny guy",
+    "key": "e198b268_893e_4f36_a497_fac78618f78b",
+    "details": {
+        "subgameType": "standard",
+        "description": "Tell a joke. If noone laughs take one sip.",
+        "content": false,
+        "category": "Solo"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Phone addicts",
+    "key": "68933722_022b_4b96_9e6d_ca66ad5d51f5",
+    "details": {
+        "subgameType": "standard",
+        "description": "Anyone looking at their phone right now take one sip.",
+        "content": false,
+        "category": "Solo"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "I saw a ghost",
+    "key": "3b842f6c_4d28_43b4_9d2c_1d5e7257998d",
+    "details": {
+        "subgameType": "standard",
+        "description": "The whitest player must take a sip.",
+        "content": false,
+        "category": "Solo"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Cradle of man",
+    "key": "176287f9_77b3_4760_ae51_e9ab3c538326",
+    "details": {
+        "subgameType": "standard",
+        "description": "Starting with you, go round the group and each player must name an African country. The first to fail or repeat must take two sips.",
+        "content": false,
+        "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Cinephile",
+    "key": "75f5e8d1_ceab_44c6_ba02_55208f7bd865",
+    "details": {
+        "subgameType": "standard",
+        "description": "Say a quote from a very famous movie. The next player must guess the movie or take one sip.",
+        "content": false,
+        "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Songbird",
+    "key": "82e8a434_d898_43c4_a69c_be9a00f04c93",
+    "details": {
+        "subgameType": "standard",
+        "description": "Whistle a famous song. The first person to guess it can nominate two sips.",
+        "content": false,
+        "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Copycat",
+    "key": "5dc87154_9509_41fc_ac94_804d032a0997",
+    "details": {
+        "subgameType": "standard",
+        "description": "Whatever the next player gets on their turn, you must copy.",
+        "content": false,
+        "category": "Everybody"
+    }
 }
 ]
