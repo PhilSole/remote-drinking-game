@@ -1,8 +1,9 @@
 .view.waiting-room {
     .header-wrap {
-        padding: 0 18px;
+        padding: 0 16px;
 
         .sub {
+            display: none;
             margin-bottom: 2em;
         }
     }
@@ -12,7 +13,7 @@
             width: 640px;
             max-width: 100%;
             margin: 0 auto;
-            padding: 0 18px;
+            padding: 0 16px;
         }
     
         @media screen and (max-width: 639px) {
@@ -41,12 +42,23 @@
         .form-feedback {
             margin-top: 24px;
         }
+
+        @media screen and (max-width: 639px) {
+            input {
+                width: 100%;
+            }
+            
+            button {
+                width: 100%;
+                margin: 24px auto 0;
+            }
+        }
     }
     
     .share-start-wrap {
         .begin {
             display: none;
-            margin: 24px auto;
+            margin: 60px auto 48px;
         }
 
         .share-link-wrap {
@@ -60,7 +72,17 @@
             border: none;
             padding: 20px 24px;
             background: #efefef;
-        }    
+        }
+        
+        @media screen and (max-width: 639px) {
+            .share-link-wrap {
+                flex-direction: column;
+            }
+
+            #shareLink {
+                width: 100%;
+            }
+        }
     }
     
     .waiting-list-wrap {

@@ -77,6 +77,31 @@ codrink19.game = function() {
                 $playerList.append('<li>' + player.nickname + '</li>');    
             }
         });
+
+        // Position the player list so active is in the middle
+        // setTimeout(positionPlayerList, 30);
+    }
+
+    function positionPlayerList() {
+        let $activePlayer = $playerList.find('.active');
+        let playerListOffset = $playerList.offset().left;
+        let activeOffset = $activePlayer.offset().left;
+
+        console.log(playerListOffset, activeOffset);
+
+        if(activeOffset > windowWidth/2) {
+            console.log('its past halfway');
+            let activeWidth = $activePlayer.outerWidth();
+            let amountToShift = activeOffset + playerListOffset + activeWidth/2 - windowWidth/2;
+            console.log(activeWidth, amountToShift);
+            $playerListWrap.animate({
+                scrollLeft: amountToShift
+            }, 500);
+        } else {
+            $playerListWrap.animate({
+                scrollLeft: 0
+            }, 500);            
+        }
     }
 
     function setNextPlayer(currentindex) {

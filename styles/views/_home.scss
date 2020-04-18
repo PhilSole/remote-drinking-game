@@ -8,10 +8,11 @@
     }
 
     .header-wrap {
-        padding: 0 18px;
+        padding: 0 16px;
     
         h1 {
             margin-bottom: 0;
+            padding-top: .75em;
         }
 
         h2 {
@@ -22,7 +23,7 @@
     .logo-wrap {
         .inner {
             width: 260px;
-            max-width: 66%;
+            max-width: 60%;
             margin: 24px auto 0;
         }
     }

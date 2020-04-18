@@ -60,7 +60,7 @@
                 <div class="nickname-form-wrap">
                     <div class="inner">
                         <form class="formPlayer" action="">
-                            <input id="playerName" autocomplete="off" />
+                            <input id="playerName" autocomplete="off" maxlength="16" title="Letters, numbers, and spaces only please."/>
                             <button>Submit</button>
                         </form>
                         <div class="form-feedback"></div>
@@ -69,8 +69,8 @@
                 <div class="share-start-wrap">
                     <div class="inner">
                         <div class="share-link-wrap">
-                            <input id="shareLink"></input>
-                            <button class="link-copy">Copy</button>
+                            <div id="shareLink"></div>
+                            <button class="link-copy" data-clipboard-target="#shareLink">Copy</button>
                         </div>
                         <button class="begin">Start the game</button>
                     </div>
@@ -98,7 +98,6 @@
                     <button class="btn-restart">Restart?</button>
                 </div>
                 <div class="player-list-wrap">
-                    <span class="heading">Players:</span>
                     <ol class="player-list"></ol> 
                 </div>
             </div>

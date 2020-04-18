@@ -2,11 +2,13 @@
     .main-message-wrap {
         .main {
             font-size: 2.75rem;
-            padding: .4em .5em .5em;
+            padding: .4em 16px .5em;
         }
     }
 
     .minigame-wrap {
+        padding: 0 16px;
+
         .title {
             font-size: 4rem;
         }
@@ -16,6 +18,12 @@
             width: 640px;
             max-width: 100%;
             margin: auto;
+        }
+
+        @media screen and (max-width:639px) {
+            .title {
+                font-size: 3rem;
+            }
         }
     }
 
@@ -40,18 +48,19 @@
 
     .player-list-wrap {
         position: fixed;
-        bottom: 18px;
-        left: 18px;
-
-        .heading {
-            font-weight: 700;
-        }
+        bottom: 0;
+        left: 0;
+        padding: 6px;
+        width: 100%;
+        overflow-x: auto;
     }
     
     .player-list {
         display: inline-block;
         padding: 0;
         margin: 0;
+        font-size: .75rem;
+        white-space: nowrap;
 
         li {
             display: inline-block;
