@@ -10,16 +10,19 @@ codrink19.waitingRoom = function() {
     let $shareStartWrap, $shareLinkWrap, $shareLink, $btnBegin;
     let $waitingWrap, $waitingList, $roomCount;
 
-    let roomKey;
+    let roomKey, roomObject, allPlayers, minigames;
     
-    let init = function(theRoomKey) {
+    let init = function(theRoomKey, theRoomObject, thePlayers, theMinigames) {
         roomKey = theRoomKey;
+        roomObject = theRoomObject;
+        allPlayers = thePlayers;
+        minigames = theMinigames;
 
         // Set DOM references
         setWaitingDOMvars();
 
         // Either joining an existing room or creating a new one
-        checkForRoomKey();
+        checkExistingCredentials();
         
         // set UI interaction listeners
         setUIEventListeners();
@@ -54,19 +57,36 @@ codrink19.waitingRoom = function() {
         $roomCount = $waitingWrap.find('.room-count');        
     }
 
-    function checkForRoomKey() {
-        if(roomKey) {
-            socket.emit('see waiting room', roomKey, function(otherplayers) {
-                otherplayers.forEach(player => {
-                    $waitingList.append('<li>' + player.nickname + '</li>');    
-                });
-                
-                $waitingWrap.addClass('show-block');
-            });
+    function checkExistingCredentials() {
+        if(roomObject) {
+
+            $formWrap.addClass('hide-me');
+            $main.text("You're reconnected");
+
+            if(roomObject.status == 'started') {
+                codrink19.game.init(allPlayers, roomobject, minigames);
+            } else {
+                // Construct the game share link
+                let gameURL = location.host + '/join?r=' + roomObject.lock + '&n=' + encodeURI(playerData.nickname);
+
+                $shareLink.text(gameURL);
+                $shareLinkWrap.addClass('show-flex');
+                $sub.text('Share this link with your friends so they can join the game.').addClass('show-block');                
+            }
+
+        } else if(roomKey) {
 
             $main.text("You're connected");
             $sub.text('Enter a nickname to join the player list.').addClass('show-block');
         }
+
+        socket.emit('see waiting room', roomKey, function(otherplayers) {
+            otherplayers.forEach(player => {
+                $waitingList.append('<li>' + player.nickname + '</li>');    
+            });
+            
+            $waitingWrap.addClass('show-block');
+        });        
     }
 
     function setUIEventListeners() {

@@ -97,24 +97,42 @@ io.on('connection', function(socket){
     // ---------------------------------------------------------------------------------------
     socket.on('disconnect', function(){
         console.log('user disconnected with ID: ' + socket.id);
+
+        let playerIndex = playersList.indexOf(player => player.id === socket.id);
+        let thePlayer = playersList[playerIndex];
+
+        if(thePlayer) {
+            thePlayer.timeout = setTimeout(() => {
+                playersList.splice(playerIndex, 1);
+            }, 1200000);
+    
+            let allPlayers = playersList.filter(player => player.roomKey === thePlayer.roomKey);
+    
+            if(allPlayers.length < 2) {
+                let roomIndex = roomsList.indexOf(room => room.lock === player.roomKey);
+                roomsList.splice(roomIndex, 1);
+            }
+        }
+
     });
 
 
     // ---------------------------------------------------------------------------------------
     // Handle user reconnection request
     // ---------------------------------------------------------------------------------------
-    socket.on('request reconnection', function(requestID, acknowledge){
-        let playerData = playersList.filter(player => player['id'] === requestID)[0];
+    socket.on('request reconnection', function(playerID, acknowledge){
+        let player = playersList.find(player => player.id === playerID);
 
         // If the playerData exists the room must exist because all players in a room are deleted when the room is.
-        if(playerData) {
+        if(player) {
+            clearTimeout(player.timeout);
             // Set the new ID and join the room again
-            playerData.id = socket.id;
-            socket.join(playerData.roomKey);
+            player.id = socket.id;
+            socket.join(player.roomKey);
 
             // Collect updated game data for reconnecting player
-            let roomObject = roomsList.filter(room => room['lock'] === playerData.roomKey)[0];
-            let allPlayers = playersList.filter(player => player['roomKey'] === roomObject.lock);
+            let roomObject = roomsList.find(room => room.lock === player.roomKey);
+            let allPlayers = playersList.filter(player => player.roomKey === roomObject.lock);
 
             // Callback with success value and game data
             acknowledge(true, allPlayers, roomObject, dataMinigames);
