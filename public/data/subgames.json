@@ -136,7 +136,7 @@
     "key": "f6876ba0_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Repeat the last word of every sentence you say for the rest of the game! Forget, and take one sip.",
+        "description": "Repeat the last word of every sentence you say one round! Forget, and take one sip.",
         "content": false,
         "category": "Rule"
     }
