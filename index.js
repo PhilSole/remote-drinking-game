@@ -6,7 +6,6 @@ let app = express();
 let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 let path = require('path');
-// var fs = require("fs");
 
 // Minigames variable from json file
 const dataMinigames = require(__dirname + '/public/data/subgames.json');
@@ -50,14 +49,14 @@ app.get('/join', function(req, res){
     let reqCreator = req.query.n;
 
     // The supposed room object.
-    let roomObject = roomsList.filter(room => room.lock === reqRoom)[0];
+    let roomObject = roomsList.find(room => room.lock === reqRoom);
 
     // Send index.html no matter what
     res.sendFile(__dirname + '/index.html');
 
     // Redirect depending on whether room actually exists and attach status param
     if(roomObject) {
-        res.redirect('/?r=' + reqRoom + '&n=' + reqCreator + '&s=' + roomObject.status);
+        res.redirect('/?r=' + reqRoom + '&n=' + reqCreator);
     } else if(reqCreator) {
         res.redirect('/?r=gameover&n=' + reqCreator);
     } else {
@@ -98,22 +97,25 @@ io.on('connection', function(socket){
     socket.on('disconnect', function(){
         console.log('user disconnected with ID: ' + socket.id);
 
-        let playerIndex = playersList.indexOf(player => player.id === socket.id);
+        console.log(playersList);
+        let playerIndex = playersList.findIndex(player => player.id === socket.id);
+        console.log(playerIndex);
         let thePlayer = playersList[playerIndex];
-
+        console.log(thePlayer);
         if(thePlayer) {
             thePlayer.timeout = setTimeout(() => {
                 playersList.splice(playerIndex, 1);
             }, 1200000);
     
+            console.log(thePlayer);
+
             let allPlayers = playersList.filter(player => player.roomKey === thePlayer.roomKey);
     
             if(allPlayers.length < 2) {
-                let roomIndex = roomsList.indexOf(room => room.lock === player.roomKey);
+                let roomIndex = roomsList.findIndex(room => room.lock === player.roomKey);
                 roomsList.splice(roomIndex, 1);
             }
         }
-
     });
 
 
@@ -148,7 +150,7 @@ io.on('connection', function(socket){
     // New game requested from the waiting room by new player
     // ---------------------------------------------------------------------------------------
     socket.on('new game request', function(nickname, lock, acknowledge){
-        playersList.push({id:socket.id, nickname:nickname, roomKey:lock});
+        playersList.push({id:socket.id, nickname:nickname, roomKey:lock, timeout:'active'});
         roomsList.push({lock:lock, status:'waiting', history: []});
 
         socket.join(lock);
@@ -160,8 +162,9 @@ io.on('connection', function(socket){
     // A player enters the waiting room and can see who's there
     // ---------------------------------------------------------------------------------------
     socket.on('see waiting room', function(roomKey, acknowledge){
-        let otherPlayers = playersList.filter(player => player.roomKey === roomKey);
-        acknowledge(otherPlayers);
+        let otherPlayers = getActivePlayers(roomKey);
+        let roomObject = roomsList.find(room => room.lock === roomKey);
+        acknowledge(otherPlayers, roomObject);
     });
 
 
@@ -169,8 +172,8 @@ io.on('connection', function(socket){
     // Joining player has submitted name to actually join the room
     // ---------------------------------------------------------------------------------------
     socket.on('join room', function(nickname, roomKey, acknowledge){
-        playersList.push({id:socket.id, nickname:nickname, roomKey:roomKey});
-        let allPlayers = playersList.filter(player => player.roomKey === roomKey);
+        playersList.push({id:socket.id, nickname:nickname, roomKey:roomKey, timeout:'active'});
+        let allPlayers = getActivePlayers(roomKey);
         let roomObject = roomsList.find(room => room.lock === roomKey);
 
         socket.join(roomKey);
@@ -188,7 +191,7 @@ io.on('connection', function(socket){
             roomObject.status = 'started';
             roomObject.turn = socket.id;
 
-            let allPlayers = playersList.filter(player => player.roomKey === roomKey);
+            let allPlayers = getActivePlayers(roomKey);
 
             io.to(roomKey).emit('game start', allPlayers, roomObject, dataMinigames);
         }
@@ -203,7 +206,6 @@ io.on('connection', function(socket){
 
         let roomObject = roomsList.find(room => room.lock === roomKey);
         roomObject.history.push(minigameKey);
-        console.log(roomObject.history);
     });
 
 
@@ -211,7 +213,7 @@ io.on('connection', function(socket){
     // A player passed the turn
     // ---------------------------------------------------------------------------------------
     socket.on('pass turn', function(roomKey){
-        let allPlayers = playersList.filter(player => player.roomKey === roomKey);
+        let allPlayers = getActivePlayers(roomKey);
         let roomObject = roomsList.find(room => room.lock === roomKey);
 
         // Set the room turn to the next player's ID
@@ -230,3 +232,15 @@ io.on('connection', function(socket){
         io.to(roomKey).emit('turn passed', allPlayers, roomObject);
     });
 });
+
+function getActivePlayers(roomKey) {
+    let allActivePlayers = playersList.filter(player => {
+        if(player.roomKey === roomKey && player.timeout === 'active') {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    return allActivePlayers;
+}

@@ -119,8 +119,10 @@ codrink19.game = function() {
         setMinigames();
 
         // Start the ticker loop that repeatedly updates the minigame title
-        tickerGoing = true;
-        runTicker();
+        if(!tickerGoing) {
+            tickerGoing = true;
+            runTicker();
+        }
 
         // Decide this client's role in the turn
         if(currentPlayer.id == playerData.id) {
@@ -151,7 +153,6 @@ codrink19.game = function() {
                 $btnPassTurn.addClass('show-inline-block');
 
                 $btnPassTurn.one('click', () => {
-                    console.log('clicked to pass turn');
                     socket.emit('pass turn', playerData.roomKey);    
                 });
             }, 4000);
@@ -220,8 +221,6 @@ codrink19.game = function() {
             allPlayers = thePlayers;
             roomObject = theRoom;
 
-            console.log(roomObject);
-
             setPlayers();
             runTheTurn();
 
@@ -229,6 +228,12 @@ codrink19.game = function() {
             $minigameDescription.removeClass('show-block');
             $mainMessageWrap.removeClass('hide-me');
         });
+
+        // A new member has joined the room so update the view
+        socket.on('new member', function(thePlayers) {
+            allPlayers = thePlayers
+            setPlayers();
+        });        
     }
 
 

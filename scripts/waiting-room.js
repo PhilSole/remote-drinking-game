@@ -64,7 +64,7 @@ codrink19.waitingRoom = function() {
             $main.text("You're reconnected");
 
             if(roomObject.status == 'started') {
-                codrink19.game.init(allPlayers, roomobject, minigames);
+                codrink19.game.init(allPlayers, roomObject, minigames);
             } else {
                 // Construct the game share link
                 let gameURL = location.host + '/join?r=' + roomObject.lock + '&n=' + encodeURI(playerData.nickname);
@@ -78,15 +78,23 @@ codrink19.waitingRoom = function() {
 
             $main.text("You're connected");
             $sub.text('Enter a nickname to join the player list.').addClass('show-block');
-        }
 
-        socket.emit('see waiting room', roomKey, function(otherplayers) {
+            seeWaitingRoom();
+        }
+    }
+
+    function seeWaitingRoom() {
+        socket.emit('see waiting room', roomKey, function(otherplayers, roomObject) {
             otherplayers.forEach(player => {
                 $waitingList.append('<li>' + player.nickname + '</li>');    
             });
             
+            if(roomObject.status == 'started') {
+                $roomCount.append(' (game has started)');    
+            }
+
             $waitingWrap.addClass('show-block');
-        });        
+        });
     }
 
     function setUIEventListeners() {
@@ -94,7 +102,13 @@ codrink19.waitingRoom = function() {
         $form.on('submit', function(e) {
             e.preventDefault();
 
-            createNewGame(validateNickname());
+            let nickname = validateNickname();
+
+            if(!roomKey) {
+                createNewGame(nickname);
+            } else {
+                joinGame(nickname);
+            }
         });
 
         // Set up copy button with clipboard.js library
@@ -103,9 +117,6 @@ codrink19.waitingRoom = function() {
         // Listen for start button click
         $btnBegin.on('click', function() {
             socket.emit('start game request', playerData.roomKey);
-            if(roomObject.status == 'started') {
-                codrink19.game.init(allPlayers, roomobject, minigames);    
-            }
         });
     }
 
@@ -131,43 +142,49 @@ codrink19.waitingRoom = function() {
     function createNewGame(nickname) {
         if(!nickname) return;
 
-        if(!roomKey) {
-            // New game so give it an ID
-            let lock = Math.random().toString(36).slice(-6);
+        // New game so give it an ID
+        let lock = Math.random().toString(36).slice(-6);
 
-            // Emit a socket event with new player name and room
-            socket.emit('new game request', nickname, lock, function() {
-                // Set in-memory and local storage values for player ID and name
-                setPlayerData(socket.id, nickname, lock);
-            });
+        // Emit a socket event with new player name and room
+        socket.emit('new game request', nickname, lock, function() {
+            // Set in-memory and local storage values for player ID and name
+            setPlayerData(socket.id, nickname, lock);
+        });
 
-            // Construct the game share link
-            let gameURL = location.host + '/join?r=' + lock + '&n=' + encodeURI(nickname);
+        // Construct the game share link
+        let gameURL = location.host + '/join?r=' + lock + '&n=' + encodeURI(nickname);
 
-            // Update the view
-            $formWrap.addClass('hide-me');
-            $waitingList.append('<li>' + nickname + '</li>');
-            $shareLink.text(gameURL);
-            $shareLinkWrap.addClass('show-flex');
-            $waitingWrap.addClass('show-block');
-            $main.text("All set, " + nickname);
-            $sub.text('Share this link with your friends so they can join the game.').addClass('show-block');
-        } else {                        
+        // Update the view
+        $formWrap.addClass('hide-me');
+        $waitingList.append('<li>' + nickname + '</li>');
+        $shareLink.text(gameURL);
+        $shareLinkWrap.addClass('show-flex');
+        $waitingWrap.addClass('show-block');
+        $main.text("All set, " + nickname);
+        $sub.text('Share this link with your friends so they can join the game.').addClass('show-block');
+    }
+    
+    function joinGame(nickname) {
+        if(!nickname) return;
 
-            // Emit a socket event with new player name and the room to join
-            socket.emit('join room', nickname, roomKey, function(allPlayers, theRoomObject, theMinigames) {
-                // Set local storage values for player ID and name Existing game so room given
-                roomObject = theRoomObject;
-                minigames = theMinigames;
-                setPlayerData(socket.id, nickname, roomKey);
-                updateWaitingList(allPlayers);
-                $main.text("You're in, " + nickname);
+        // Emit a socket event with new player name and the room to join
+        socket.emit('join room', nickname, roomKey, function(allPlayers, theRoomObject, theMinigames) {
+            // Set local storage values for player ID and name Existing game so room given
+            roomObject = theRoomObject;
+            minigames = theMinigames;
+            setPlayerData(socket.id, nickname, roomKey);
+            updateWaitingList(allPlayers); // Shows begin button if more than one player
+            $main.text("You're in, " + nickname);
+
+            if(roomObject.status == 'started') {
+                codrink19.game.init(allPlayers, roomObject, minigames);
+            } else {
                 $sub.text('You can wait for more players or start the game.');
-            });
+            }
+        });
 
-            // Update the view
-            $formWrap.addClass('hide-me');
-        }
+        // Update the view
+        $formWrap.addClass('hide-me'); 
     }    
 
     function setSocketListeners() {
@@ -182,8 +199,8 @@ codrink19.waitingRoom = function() {
         });
         
         // The game is being started so init the game
-        socket.on('game start', function(allPlayers, roomobject, minigames) {
-            codrink19.game.init(allPlayers, roomobject, minigames);
+        socket.on('game start', function(allPlayers, roomObject, minigames) {
+            codrink19.game.init(allPlayers, roomObject, minigames);
         });
     }
 

@@ -29,7 +29,7 @@ $(document).ready(function() {
     // window width and height for layout with JS
     setGlobalLayoutVars();
 
-    // Check for existing game data in URL or localStorage
+    // Check for existing game data in URL or localStorage. Just enough to direct them and have the data validated.
     getExistingGameData();
 
     // Initialise socket.io-client
@@ -45,7 +45,6 @@ $(document).ready(function() {
 
     // Set global event listeners
     $(window).on('resize', $.debounce( 50, handleResize));
-    
 });
 
 function setGlobalDOMVars() {
@@ -67,7 +66,7 @@ function getExistingGameData() {
 
     // Check query params for roomKey, if localStorage is expired this might be relevant
     urlParams = new URLSearchParams(window.location.search);
-    playerData.roomKey = urlParams.get('r');
+    playerData.roomKey = urlParams.get('r'); // Might be null
 }
 
 function directVisitor() {

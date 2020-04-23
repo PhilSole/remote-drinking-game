@@ -21,15 +21,17 @@ codrink19.home = function() {
     }
 
     function updateSplash() {
-        if(playerData.id) {
+        if(playerData.id) { // True if localStorage value exists
             $connectHeading.text('Reconnecting');
-        } else if(playerData.roomKey) {
+        } else if(playerData.roomKey) { // True if URLSearchParams have valid key/value
             roomData.creator = urlParams.get('n');
-            if(roomData.creator) {
+            if(roomData.creator) { // True if valid share link
                 $announcement.text(roomData.creator + ' invited you').addClass('show-block');
             } else {
                 $announcement.text('Checking your invite').addClass('show-block');
             }
+        } else {
+            // Do nothing, the default content is in the HTML already and displayed by CSS
         }
     }
 
