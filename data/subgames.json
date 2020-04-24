@@ -572,7 +572,7 @@
     "key": "0f9cd9dc_2636_4956_b2e0_e3670fb98261",
     "details": {
         "subgameType": "standard",
-        "description": "Every must ignore you for one round. Anyone who forgets and responds to you takes one sip.",
+        "description": "Everyone must ignore you for one round. Anyone who forgets and responds to you takes one sip.",
         "content": false,
         "category": "Everybody"
     }

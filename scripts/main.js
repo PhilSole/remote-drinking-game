@@ -72,12 +72,12 @@ function getExistingGameData() {
 function directVisitor() {
     // Direct based on data presence
     if(playerData.id) {
-        // codrink19.connection.reconnection();  
+        // Take the localStorage player ID and check with the server if the game exists
+        codrink19.connection.reconnection();  
 
     } else if(playerData.roomKey) {
         // No local storage but roomKey in query params so new player but room may be started, finished, or waiting.
         // New player always has to go through the waiting room though so they can enter a nickname
-
         if(playerData.roomKey === 'gameover') {
             codrink19.home.gameNotFound();    
         } else {

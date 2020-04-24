@@ -38,12 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //  Express routes 
 //  Two main and a catch-all. One for new visitor and one for joining a room.
 // ===========================================================================================
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
-});
 
 // This does a check to see if the room exists
-app.get('/join', function(req, res){
+app.get('/', function(req, res){
     // The query params
     let reqRoom = req.query.r;
     let reqCreator = req.query.n;
@@ -56,11 +53,11 @@ app.get('/join', function(req, res){
 
     // Redirect depending on whether room actually exists and attach status param
     if(roomObject) {
-        res.redirect('/?r=' + reqRoom + '&n=' + reqCreator);
+        res.redirect('/join?r=' + reqRoom + '&n=' + reqCreator);
     } else if(reqCreator) {
-        res.redirect('/?r=gameover&n=' + reqCreator);
+        res.redirect('/oops?r=gameover&n=' + reqCreator);
     } else {
-        res.redirect('/?r=gameover');    
+        res.redirect('/new-game');    
     }
 });
 
@@ -97,23 +94,26 @@ io.on('connection', function(socket){
     socket.on('disconnect', function(){
         console.log('user disconnected with ID: ' + socket.id);
 
-        console.log(playersList);
+        // Find the player in the playersList
         let playerIndex = playersList.findIndex(player => player.id === socket.id);
-        console.log(playerIndex);
         let thePlayer = playersList[playerIndex];
-        console.log(thePlayer);
-        if(thePlayer) {
+
+        if(thePlayer) { // True if the disconnection happens after the player is registered on the playersList
+
+            // Attach a timeout to delete the player in 10 minutes if no reconnection
             thePlayer.timeout = setTimeout(() => {
                 playersList.splice(playerIndex, 1);
-            }, 1200000);
+            }, 600000);
     
-            console.log(thePlayer);
+            // Check how many players are left in the room -> delete it or pass the turn if it was this player's turn
+            let allPlayers = getActivePlayers(thePlayer.roomKey);
+            let roomIndex = roomsList.findIndex(room => room.lock === thePlayer.roomKey);
+            let theRoom = roomsList[roomIndex];
 
-            let allPlayers = playersList.filter(player => player.roomKey === thePlayer.roomKey);
-    
             if(allPlayers.length < 2) {
-                let roomIndex = roomsList.findIndex(room => room.lock === player.roomKey);
                 roomsList.splice(roomIndex, 1);
+            } else if(thePlayer.id == theRoom.turn) {
+                passTurn(theRoom.lock);         
             }
         }
     });
@@ -124,21 +124,29 @@ io.on('connection', function(socket){
     // ---------------------------------------------------------------------------------------
     socket.on('request reconnection', function(playerID, acknowledge){
         let player = playersList.find(player => player.id === playerID);
-
-        // If the playerData exists the room must exist because all players in a room are deleted when the room is.
+        
+        // If the player exist carry on
         if(player) {
-            clearTimeout(player.timeout);
-            // Set the new ID and join the room again
-            player.id = socket.id;
-            socket.join(player.roomKey);
-
-            // Collect updated game data for reconnecting player
             let roomObject = roomsList.find(room => room.lock === player.roomKey);
-            let allPlayers = playersList.filter(player => player.roomKey === roomObject.lock);
 
-            // Callback with success value and game data
-            acknowledge(true, allPlayers, roomObject, dataMinigames);
+            // Now check if the room still exists for the player
+            if(roomObject) {
+                // Clear the timeout that would delete the player and set to active
+                clearTimeout(player.timeout);
+                player.timeout = 'active';
 
+                // Set the new ID and join the room again
+                player.id = socket.id;
+                socket.join(player.roomKey);
+
+                // Collect updated playersList for reconnecting player
+                let allPlayers = getActivePlayers(player.roomKey);
+
+                // Callback with success value and game data
+                acknowledge(true, allPlayers, roomObject, dataMinigames);
+            } else {
+                acknowledge(false);
+            }
         } else {
             // The game doesn't exist anymore so need to delete local storage
             acknowledge(false);
@@ -213,25 +221,28 @@ io.on('connection', function(socket){
     // A player passed the turn
     // ---------------------------------------------------------------------------------------
     socket.on('pass turn', function(roomKey){
-        let allPlayers = getActivePlayers(roomKey);
-        let roomObject = roomsList.find(room => room.lock === roomKey);
-
-        // Set the room turn to the next player's ID
-        // TODO: replace with findIndex()
-
-        let currentIndex = allPlayers.findIndex(player => player.id === roomObject.turn);
-        let nextIndex = 0;
-
-        if(currentIndex < allPlayers.length - 1) {
-            nextIndex = currentIndex + 1;
-        }
-
-        roomObject.turn = allPlayers[nextIndex].id;
-        
-        // Emit to room the passed turn
-        io.to(roomKey).emit('turn passed', allPlayers, roomObject);
+        passTurn(roomKey);
     });
 });
+
+
+function passTurn(roomKey) {
+    let allPlayers = getActivePlayers(roomKey);
+    let roomObject = roomsList.find(room => room.lock === roomKey);
+
+    // Set the room turn to the next player's ID
+    let currentIndex = allPlayers.findIndex(player => player.id === roomObject.turn);
+    let nextIndex = 0;
+
+    if(currentIndex < allPlayers.length - 1) {
+        nextIndex = currentIndex + 1;
+    }
+
+    roomObject.turn = allPlayers[nextIndex].id;
+    
+    // Emit to room the passed turn
+    io.to(roomKey).emit('turn passed', allPlayers, roomObject);    
+}
 
 function getActivePlayers(roomKey) {
     let allActivePlayers = playersList.filter(player => {

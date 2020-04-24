@@ -152,7 +152,7 @@ codrink19.waitingRoom = function() {
         });
 
         // Construct the game share link
-        let gameURL = location.host + '/join?r=' + lock + '&n=' + encodeURI(nickname);
+        let gameURL = location.host + '/?r=' + lock + '&n=' + encodeURI(nickname);
 
         // Update the view
         $formWrap.addClass('hide-me');
@@ -180,6 +180,7 @@ codrink19.waitingRoom = function() {
                 codrink19.game.init(allPlayers, roomObject, minigames);
             } else {
                 $sub.text('You can wait for more players or start the game.');
+                $btnBegin.addClass('show-block');
             }
         });
 
@@ -193,8 +194,10 @@ codrink19.waitingRoom = function() {
             let newPlayer = allPlayers[allPlayers.length - 1].nickname;
             updateWaitingList(allPlayers);
             $main.text(newPlayer + " joined!");
-            if(allPlayers.length === 2) {
+
+            if(allPlayers.length > 1) {
                 $sub.text('You can wait for more players or start the game.');
+                $btnBegin.addClass('show-block');
             }
         });
         
@@ -209,9 +212,9 @@ codrink19.waitingRoom = function() {
         playerData.nickname = nickname;
         playerData.roomKey = roomKey;
 
-        // localStorage.setItem('id', id);
-        // localStorage.setItem('nickname', nickname);
-        // localStorage.setItem('roomKey', roomKey);
+        localStorage.setItem('id', id);
+        localStorage.setItem('nickname', nickname);
+        localStorage.setItem('roomKey', roomKey);
     }
 
     function updateWaitingList(allPlayers) {
@@ -222,10 +225,6 @@ codrink19.waitingRoom = function() {
         });
 
         $roomCount.html(allPlayers.length + ' players');
-
-        if(allPlayers.length > 1) {
-            $btnBegin.addClass('show-block');
-        }
     }
 
     function showWaitingRoom() {

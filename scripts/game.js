@@ -245,6 +245,7 @@ codrink19.game = function() {
     }
 
     function showViewGame() {
+        $viewHome.removeClass('active');
         $viewWaiting.removeClass('active');
         $viewGame.addClass('active');
     }

@@ -12,20 +12,25 @@ codrink19.connection = function() {
             console.log('attempting to reconnect');
 
             if(gameExists) {
+                localStorage.setItem('id', socket.id);
 
-                playerData.id = localStorage.getItem('id');
+                playerData.id = socket.id;
                 playerData.nickname = localStorage.getItem('nickname');
                 playerData.roomKey = localStorage.getItem('roomKey');
-                
-                codrink19.waitingRoom.init(roomObject.lock, roomObject, allPlayers, minigames);
 
+                if(roomObject.status == 'started') {
+                    codrink19.game.init(allPlayers, roomObject, minigames);
+                } else {
+                    codrink19.waitingRoom.init(roomObject.lock);
+                }
+                
             } else {
                 console.log('the localStorage data doesnt exist on server');
                 localStorage.removeItem('id');
                 localStorage.removeItem('roomKey');
                 localStorage.removeItem('nickname');
 
-                codrink19.home.gameNotFound();
+                codrink19.home.allowNewGame();
             }
 
         });      
