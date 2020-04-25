@@ -121,17 +121,6 @@
 },
 {
     "objectType": "subgame",
-    "name": "Eyes wide shut",
-    "key": "f6874490_397f_11e8_a45b_25718a0c5009",
-    "details": {
-        "subgameType": "standard",
-        "description": "Keep your eyes closed until your next turn. Only open them for games that require vision, else take one sip each time you're caught.",
-        "content": false,
-        "category": "Rule"
-    }
-},
-{
-    "objectType": "subgame",
     "name": "Repeater",
     "key": "f6876ba0_397f_11e8_a45b_25718a0c5009",
     "details": {
@@ -169,7 +158,7 @@
     "key": "f688a420_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Every time you or the next player has to take a sip, the buddy has to as well until your next turn.",
+        "description": "You have to drink every time the next player has to and vice versa, until your next turn.",
         "content": false,
         "category": "Rule"
     }
@@ -707,6 +696,160 @@
         "description": "Whatever the next player gets on their turn, you must copy.",
         "content": false,
         "category": "Everybody"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Throw yo hands up",
+    "key": "4d33073a_2761_4ca4_9500_360019042854",
+    "details": {
+        "subgameType": "standard",
+        "description": "Everyone raises one hand above their head. Play continues. The first person to lower their hand past the top of their head, takes three sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Greetings from Earth",
+    "key": "f24356b4_66e6_41f8_b8b8_6b8a21db4142",
+    "details": {
+        "subgameType": "standard",
+        "description": "Going around the group each person must say \"hello\" in a different language. The first person to fail takes two sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Word association",
+    "key": "91b1ecba_136b_4faf_a851_2ef80a6e4582",
+    "details": {
+        "subgameType": "standard",
+        "description": "Say a word. The next player has two seconds to say a word related to the previous word. This goes on around the group until someone fails and takes two sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Relationship status",
+    "key": "4166ae2e_81d9_4092_adc3_efe5c0de9f76",
+    "details": {
+        "subgameType": "standard",
+        "description": "You take one sip if you're single, two if you're in a relationship, and three if there's kids involved, cause you probably need them.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "What's my age again?",
+    "key": "0394cbcf_6240_447f_b42d_25fe290a0d37",
+    "details": {
+        "subgameType": "standard",
+        "description": "Guess the age of each player. For each one you get right they take a sip",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Potty mouth",
+    "key": "bebd9836_44d5_40a8_923f_6e8cf6d37420",
+    "details": {
+        "subgameType": "standard",
+        "description": "Every sentence you say must include one swear word until your next turn. Forget and take one f#*@ing sip.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Works of art",
+    "key": "7b196e80_911b_4104_88cf_a6fa4a66bd08",
+    "details": {
+        "subgameType": "standard",
+        "description": "Everyone else has one minute to find a pen and paper and draw the best bat. You vote for the winner then they get to nominate two sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Story time",
+    "key": "4879f207_3091_4427_9cd6_9863cb6b4cd5",
+    "details": {
+        "subgameType": "standard",
+        "description": "Tell a funny story about another player or take three sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Poker face",
+    "key": "719f69f9_70c4_42c5_b194_e265d4f4c381",
+    "details": {
+        "subgameType": "standard",
+        "description": "Noone is allowed to smile. The first person who does takes two sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Slideshow",
+    "key": "1e86d29e_12be_46d7_b13e_af9ded7bcecd",
+    "details": {
+        "subgameType": "standard",
+        "description": "Show everyone the three most recent photos in your phone or take three sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Muscle memory",
+    "key": "4619678a_56dd_4308_9204_1fe6901b823e",
+    "details": {
+        "subgameType": "standard",
+        "description": "Perform a simple action. The next player copies, then adds their own. Keep going around the group adding actions until someone fails. They take two sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Art history",
+    "key": "66333c02_3d9f_43ff_b6ca_362dcef1d71b",
+    "details": {
+        "subgameType": "standard",
+        "description": "Nominate a sip for every famous painter you can name, but say a wrong name and you have to take three sips.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Young blood",
+    "key": "fb4ad068_f6e8_48c4_8489_99046e90faa7",
+    "details": {
+        "subgameType": "standard",
+        "description": "The youngest player gets to nominate three sips to their elders.",
+        "content": false,
+        "category": "Rule"
+    }
+},
+{
+    "objectType": "subgame",
+    "name": "Speak propa",
+    "key": "b18727c9_097d_44a2_b235_dfe4574f5417",
+    "details": {
+        "subgameType": "standard",
+        "description": "Speak with a British accent until your next turn. Take a sip each time you forget.",
+        "content": false,
+        "category": "Rule"
     }
 }
 ]
