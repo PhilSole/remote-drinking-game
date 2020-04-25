@@ -213,7 +213,12 @@ io.on('connection', function(socket){
         socket.to(roomKey).emit('player pick', minigameKey);
 
         let roomObject = roomsList.find(room => room.lock === roomKey);
-        roomObject.history.push(minigameKey);
+
+        if(roomObject) {
+            roomObject.history.push(minigameKey);
+        } else {
+            socket.emit('game over');        
+        }
     });
 
 
@@ -230,18 +235,23 @@ function passTurn(roomKey) {
     let allPlayers = getActivePlayers(roomKey);
     let roomObject = roomsList.find(room => room.lock === roomKey);
 
-    // Set the room turn to the next player's ID
-    let currentIndex = allPlayers.findIndex(player => player.id === roomObject.turn);
-    let nextIndex = 0;
+    if(roomObject) {
+        // Set the room turn to the next player's ID
+        let currentIndex = allPlayers.findIndex(player => player.id === roomObject.turn);
+        let nextIndex = 0;
 
-    if(currentIndex < allPlayers.length - 1) {
-        nextIndex = currentIndex + 1;
+        if(currentIndex < allPlayers.length - 1) {
+            nextIndex = currentIndex + 1;
+        }
+
+        roomObject.turn = allPlayers[nextIndex].id;
+        
+        // Emit to room the passed turn
+        io.to(roomKey).emit('turn passed', allPlayers, roomObject);
+    } else {
+        socket.emit('game over');    
     }
-
-    roomObject.turn = allPlayers[nextIndex].id;
     
-    // Emit to room the passed turn
-    io.to(roomKey).emit('turn passed', allPlayers, roomObject);    
 }
 
 function getActivePlayers(roomKey) {
