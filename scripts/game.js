@@ -70,8 +70,6 @@ codrink19.game = function() {
             if(player.id == roomObject.turn) {
                 // Set the local current player var
                 currentPlayer = player;
-                setNextPlayer(index);
-
                 $playerList.append('<li class="active">' + player.nickname + '</li>');
             } else {
                 $playerList.append('<li>' + player.nickname + '</li>');    
@@ -101,16 +99,6 @@ codrink19.game = function() {
             $playerListWrap.animate({
                 scrollLeft: 0
             }, 500);            
-        }
-    }
-
-    function setNextPlayer(currentindex) {
-        let nextIndex;
-
-        if(currentindex == allPlayers.length - 1) {
-            nextIndex = 0;
-        } else {
-            nextIndex = currentindex + 1;
         }
     }
 

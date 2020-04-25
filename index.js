@@ -106,12 +106,15 @@ io.on('connection', function(socket){
             }, 600000);
     
             // Check how many players are left in the room -> delete it or pass the turn if it was this player's turn
+            // let allPlayers = playersList.filter(player => player.roomKey === thePlayer.roomKey);
             let allPlayers = getActivePlayers(thePlayer.roomKey);
             let roomIndex = roomsList.findIndex(room => room.lock === thePlayer.roomKey);
             let theRoom = roomsList[roomIndex];
 
-            if(allPlayers.length < 2) {
-                roomsList.splice(roomIndex, 1);
+            if(allPlayers.length < 1) {
+                theRoom.timeout = setTimeout(() => {
+                    roomsList.splice(roomIndex, 1);
+                }, 600000);  
             } else if(thePlayer.id == theRoom.turn) {
                 passTurn(theRoom.lock);         
             }
@@ -134,6 +137,12 @@ io.on('connection', function(socket){
                 // Clear the timeout that would delete the player and set to active
                 clearTimeout(player.timeout);
                 player.timeout = 'active';
+
+                // Clear timeout on room if it is due to be deleted
+                if(roomObject.timeout != 'active') {
+                    clearTimeout(roomObject.timeout);
+                    roomObject.timeout = 'active';    
+                }
 
                 // Set the new ID and join the room again
                 player.id = socket.id;
@@ -159,7 +168,7 @@ io.on('connection', function(socket){
     // ---------------------------------------------------------------------------------------
     socket.on('new game request', function(nickname, lock, acknowledge){
         playersList.push({id:socket.id, nickname:nickname, roomKey:lock, timeout:'active'});
-        roomsList.push({lock:lock, status:'waiting', history: []});
+        roomsList.push({lock:lock, status:'waiting', history: [], timeout: 'active'});
 
         socket.join(lock);
         acknowledge();
