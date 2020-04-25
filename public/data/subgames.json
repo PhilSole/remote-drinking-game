@@ -495,7 +495,7 @@
     "key": "f6921a00_397f_11e8_a45b_25718a0c5009",
     "details": {
         "subgameType": "standard",
-        "description": "Going in order, count upwards from 1 as a group.  However, noone can say a multiple of seven or any number with a seven in it! Clap instead.  E.g 1, 2, 3, 4, 5, 6, clap, 8, 9... If you mess up, take two sips.",
+        "description": "Going in order, count upwards from 1 as a group.  However, no one can say a multiple of seven or any number with a seven in it! Clap instead.  E.g 1, 2, 3, 4, 5, 6, clap, 8, 9... If you mess up, take two sips.",
         "content": false,
         "category": "Everybody"
     }
@@ -627,7 +627,7 @@
     "key": "e198b268_893e_4f36_a497_fac78618f78b",
     "details": {
         "subgameType": "standard",
-        "description": "Tell a joke. If noone laughs take one sip.",
+        "description": "Tell a joke. If no one laughs take one sip.",
         "content": false,
         "category": "Solo"
     }
@@ -792,7 +792,7 @@
     "key": "719f69f9_70c4_42c5_b194_e265d4f4c381",
     "details": {
         "subgameType": "standard",
-        "description": "Noone is allowed to smile. The first person who does takes two sips.",
+        "description": "No one is allowed to smile. The first person who does takes two sips.",
         "content": false,
         "category": "Rule"
     }
